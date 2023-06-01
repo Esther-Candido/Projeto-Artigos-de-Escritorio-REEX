@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escritorio</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escritorio</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="img/Logo.png" alt="" width="50px"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </nav>  
 
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzI#"></script>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Logo da empresa, link para a página inicial -->
+    <a class="navbar-brand" href="#"><img src="img/Logo.png" alt="" width="50px"></a>
+    <!-- Botão para alternar o menu da barra de navegação em telas pequenas -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Ícone do botão de alternância -->
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Itens da barra de navegação -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- Link para a seção Home -->
+        <li class="nav-item">
+          <a class="nav-link" href="#home">Home</a>
+        </li>
+        <!-- Link para a seção About -->
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <!-- Link para a seção Contact -->
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Início do menu de produtos -->
+  <ul class="nav justify-content-center produtos">
+    <!-- Link para a seção de Suprimentos de escritório -->
+    <li class="nav-item">
+      <a class="nav-link produtos-letra active" href="#" data-section="office-supplies" onclick="selectNavItem(event)">Suprimentos de escritório</a>
+    </li>
+    <!-- Link para a seção de Móveis -->
+    <li class="nav-item">
+      <a class="nav-link produtos-letra" href="#" data-section="furniture" onclick="selectNavItem(event)">Móveis</a>
+    </li>
+    <!-- Link para a seção de Eletrônicos -->
+    <li class="nav-item">
+      <a class="nav-link produtos-letra" href="#" data-section="electronics" onclick="selectNavItem(event)">Eletrônicos</a>
+    </li>
+    <!-- Link para a seção de Promoções -->
+    <li class="nav-item">
+      <a class="nav-link produtos-letra" href="#" data-section="promotions" onclick="selectNavItem(event)">Promoções</a>
+    </li>
+  </ul>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzI#"></script>
 </body>
 
 </html>
