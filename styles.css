@@ -1,7 +1,5 @@
-.produtos {
+.produtos, .AdicionarCorFooter, .nav-item2 a{
     background-color:  #383f39;
+    color: rgb(255, 255, 255);
 }
 
-.nav-item a {
-    color: #ffffff;
-}
