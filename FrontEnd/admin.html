@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REEX OFICCE</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- Logo da empresa, link para a página inicial -->
+      <a class="navbar-brand" href="#"><img src="Logo.png" alt="" width="50px"></a>
+      <!-- Botão para alternar o menu da barra de navegação em telas pequenas -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Ícone do botão de alternância -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Itens da barra de navegação -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- Link para a seção Home -->
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <!-- Link para a seção About -->
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <!-- Link para a seção Contact -->
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="row mt-3">
+
+      <div class="col-3">
+        <label for="inputThumbnail" class="form-label">Thumbnail</label>
+        <input type="text" class="form-control" id="inputThumbnail">
+      </div>
+      <div class="col-3">
+        <label for="inputTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="inputTitle">
+      </div>
+      <div class="col-3">
+        <label for="inputDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="inputDescription">
+      </div>
+      
+      <div class="col-3">
+        <label for="inputCategory" class="form-label">Category</label>
+        <select class="form-control" id="inputCategory">
+          <option value="suprimentos_de_escritorio">Suprimentos de Escritório</option>
+          <option value="moveis">Móveis</option>
+          <option value="eletronicos">Eletrônicos</option>
+          <option value="promocoes">Promoções</option>
+        </select>
+      </div>
+      
+      <div class="col-3">
+        <label for="inputPrice" class="form-label">Price</label>
+        <input type="number" class="form-control" id="inputPrice">
+      </div>
+      
+
+    </div>
+    <button type="button" class="btn btn-primary" onclick="clickAddMoveis()" style="float: right;">+ Add</button>
+
+    <br><br><br>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Thumbnail</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer mt-auto py-3 AdicionarCorFooter">
+    <div class="container">
+      <div class="row" style="align-items: center;">
+        <div class="col-md-4 justify-content-center" id="loja">
+          <h5>Loja</h5>
+          <p>
+            Endereço: Quinta da Marqueza - Palmela, Parque Industrial da Volkswagen Autoeuropa<br>
+            Codigo Postal: 2950-557
+          </p>
+        </div>
+        <div class="col-md-4" id="contacto">
+          <h5>Contacto</h5>
+          <p>
+            Telefone: (351) 1234-5678<br>
+            E-mail: faleconnosco@rexoffice.com<br>
+            Horário de funcionamento: Seg-Sex, 10h às 22h
+          </p>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="rounded-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d779.7432139171924!2d-9.004531030163571!3d38.58047290000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd194622e5ad46d1%3A0x123b3f86b5ed915a!2sATEC%20-%20Academia%20de%20Forma%C3%A7%C3%A3o%20-%20Palmela!5e0!3m2!1spt-BR!2spt!4v1681570855575!5m2!1spt-BR!2spt"
+              style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              width="200" height="120"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzI#"></script>
+
+    <script>
+      // Declara uma função para recuperar produtos do servidor
+      var getProducts = function(){
+          // Cria um novo objeto XMLHttpRequest
+          var xhttp = new XMLHttpRequest();
+  
+          // Define uma função para ser chamada quando o estado da requisição muda
+          xhttp.onreadystatechange = function() {
+              // Verifica se a requisição foi concluída e se o status HTTP é 200 (OK)
+              if (this.readyState == 4 && this.status == 200) {
+                  // Parseia a resposta da requisição como JSON
+                  var products = JSON.parse(xhttp.responseText);
+  
+                  // Constrói e insere as linhas na tabela
+                  buildRows(products)
+              }
+          };
+  
+          // Configura a requisição como GET e define a URL para a API de produtos
+          xhttp.open("GET", "http://localhost:3000/products", true);
+  
+          // Envia a requisição
+          xhttp.send();
+      };
+  
+      // Declara uma função para construir as linhas da tabela
+      var buildRows = function(products){
+          var rows = '';
+          // Itera sobre cada produto
+          for(let product of products){
+              // Cria uma nova linha para cada produto e adiciona as colunas correspondentes
+              rows += '<tr>';
+              rows += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+              rows += '<td>' + product.title + '</td>';
+              rows += '<td>' + product.description + '</td>';
+              rows += '<td>' + product.category + '</td>';
+              rows += '<td>' + product.price + '</td>';
+               // Adiciona um botão para deletar o produto, que chama a função deleteProduct quando clicado
+              rows += '<td><button onclick="deleteProduct(' + product.id + ')">Delete</button></td>';
+              rows += '</tr>';
+          }
+          
+          // Insere as linhas na tabela
+          document.getElementsByTagName("tbody")[0].innerHTML = rows;
+      };
+  
+      // Declara uma função para deletar um produto
+      var deleteProduct = function(id){
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  // Exibe um alerta com a resposta do servidor
+                  alert(xhttp.responseText)
+              }
+          };
+          // Configura a requisição como POST e define a URL para a API de deletar produto
+          xhttp.open("POST", "http://localhost:3000/deleteProduct", true);
+          // Define o header Content-Type como JSON
+          xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+          // Envia a requisição com o id do produto como corpo
+          xhttp.send(JSON.stringify({id: id}));
+      };
+
+      function clickAddMoveis() {
+  // Obtém os valores dos campos de entrada
+  var thumbnail = document.getElementById('inputThumbnail').value;
+  var title = document.getElementById('inputTitle').value;
+  var description = document.getElementById('inputDescription').value;
+  var category = document.getElementById('inputCategory').value;
+  var price = document.getElementById('inputPrice').value;
+
+  // Cria um objeto de produto com os valores fornecidos
+  var newProduct = {
+    thumbnail: thumbnail,
+    title: title,
+    description: description,
+    category: category,
+    price: price
+  };
+
+  // Envia o novo produto para o servidor
+  sendNewProductToServer(newProduct);
+}
+
+function sendNewProductToServer(newProduct) {
+  // Cria um novo objeto XMLHttpRequest
+  var xhttp = new XMLHttpRequest();
+
+  // Define uma função para ser chamada quando o estado da requisição muda
+  xhttp.onreadystatechange = function () {
+    // Verifica se a requisição foi concluída e se o status HTTP é 200 (OK)
+    if (this.readyState == 4 && this.status == 200) {
+      // Exibe um alerta com a resposta do servidor
+      alert(xhttp.responseText);
+
+      // Verifica se o produto foi adicionado com sucesso
+      if (xhttp.responseText === 'OK') {
+        // Cria uma nova linha para o novo produto
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = `
+          <td><img class="thumbnail" src="${newProduct.thumbnail}"></td>
+          <td>${newProduct.title}</td>
+          <td>${newProduct.description}</td>
+          <td>${newProduct.category}</td>
+          <td>${newProduct.price}</td>
+          <td><button onclick="deleteProduct(${newProduct.id})">Delete</button></td>
+        `;
+
+        // Obtém a tabela de produtos e adiciona a nova linha no final
+        var tableBody = document.querySelector('.table tbody');
+        tableBody.appendChild(newRow);
+
+        // Limpa os campos de entrada após adicionar o produto
+        document.getElementById('inputThumbnail').value = '';
+        document.getElementById('inputTitle').value = '';
+        document.getElementById('inputDescription').value = '';
+        document.getElementById('inputCategory').value = '';
+        document.getElementById('inputPrice').value = '';
+      }
+    }
+  };
+
+  // Configura a requisição como POST e define a URL para adicionar um produto
+  xhttp.open('POST', 'http://localhost:3000/addProduct', true);
+  // Define o header Content-Type como JSON
+  xhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+  // Envia a requisição com o novo produto como corpo
+  xhttp.send(JSON.stringify(newProduct));
+}
+
+  
+      // Adiciona um evento para quando o DOM estiver completamente carregado
+      document.addEventListener("DOMContentLoaded", () => {
+          // Chama a função para obter os produtos
+          getProducts();
+      }); 
+  
+  </script>
+
+
+</body>
+
+</html>
