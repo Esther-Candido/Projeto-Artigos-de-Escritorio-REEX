@@ -12,7 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
     <script src="firebase-init.js"></script>
     
-
+    <link rel="stylesheet" href="../FrontEnd/styles.css"> <!--css pagina geral-->
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="global.css">
 
@@ -21,12 +21,60 @@
     <script src="js/validations.js"></script>
     <script src="js/loading.js"></script>
     
-    <title>Controle de gastos</title>
+    <title>REEX OFICCE - LOGIN</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
+<body>
+
+<!--header pagina geral -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Logo da empresa, link para a página inicial -->
+        <a class="navbar-brand" href="#"><img src="../FrontEnd/Logo.png" alt="" width="50px"></a>
+        <!-- Botão para alternar o menu da barra de navegação em telas pequenas -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Ícone do botão de alternância -->
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Itens da barra de navegação -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">        
+            <!-- Link para a seção Home --> 
+            <li class="nav-item">
+            <a class="nav-link" href="../FrontEnd/index.html">Home</a>
+            </li>
+            <!-- Link para a seção About -->
+            <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+            </li>
+            <!-- Link para a seção Contact -->
+            <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+</header>
+
+  <!-- Barra dos produtos -->
+  <ul class="nav justify-content-center produtos">
+    <li class="nav-item2">
+      <a class="nav-link produtos-letra active" style="height: 40px;"></a>
+    </li>
+  </ul>
+
+<div class="centralize">
+<div class="form-container">
+    <div class="imagem-circular">
+        <img src="../FrontEnd/Logo.png" alt="Foto logo Reex">
+</div>
 
 
-<body class="centralize">
    <form>
     <div class="form-field">
         <div><label>Email</label></div>
@@ -49,11 +97,42 @@
         <button type="button" class="outline" onclick="register()">Registrar</button>
     </div>
    </form>
+</div>
+</div>
+
+<!--footer pagina geral-->
+<footer class="footer mt-auto py-3 AdicionarCorFooter" style="margin-top: 1%!important;">
+    <div class="container">
+      <div class="row" style="align-items: center;">
+        <div class="col-md-4 justify-content-center" id="loja">
+          <h5>Loja</h5>
+          <p>
+            Endereço: Quinta da Marqueza - Palmela, Parque Industrial da Volkswagen Autoeuropa<br>
+            Codigo Postal: 2950-557
+          </p>
+        </div>
+        <div class="col-md-4" id="contacto">
+          <h5>Contacto</h5>
+          <p>
+            Telefone: (351) 1234-5678<br>
+            E-mail: faleconnosco@rexoffice.com<br>
+            Horário de funcionamento: Seg-Sex, 10h às 22h
+          </p>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="rounded-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d779.7432139171924!2d-9.004531030163571!3d38.58047290000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd194622e5ad46d1%3A0x123b3f86b5ed915a!2sATEC%20-%20Academia%20de%20Forma%C3%A7%C3%A3o%20-%20Palmela!5e0!3m2!1spt-BR!2spt!4v1681570855575!5m2!1spt-BR!2spt"
+              style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              width="200" height="120"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
 
-   <!--  123abc  -->
-   <!-- https://www.youtube.com/watch?v=5YZ1i6iKZTw&list=PLMbclvogjXZVxxN06cefN7q5nyt7u5dUq&index=19  -->
 </body>
 
 

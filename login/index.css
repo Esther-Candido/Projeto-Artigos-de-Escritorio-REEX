@@ -1,14 +1,9 @@
-body {
-    height: 100vh;
-}
 
-form{
+.centralize form{
     width: 300px;
 }
 
-
-
-p{
+.centralize p{
     color: green;
 }
 
@@ -17,4 +12,17 @@ p{
 h1 {
     text-align: center ;
     text-decoration: underline;
-    font-size: 40px; }
+    font-size: 40px; 
+}
+
+.imagem-circular{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+.imagem-circular img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 

@@ -4,6 +4,7 @@
   color: rgb(0, 0, 0);
 }
 
+
 /* Esta seção define o estilo das miniaturas das imagens */
 .thumbnail {
 object-fit: cover;
