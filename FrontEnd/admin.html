@@ -77,7 +77,7 @@
         <label for="inputDescription" class="form-label">Description</label>
         <input type="text" class="form-control" id="inputDescription">
       </div>
-      
+
       <div class="col-3">
         <label for="inputCategory" class="form-label">Category</label>
         <select class="form-control" id="inputCategory">
@@ -87,12 +87,12 @@
           <option value="promocoes">Promoções</option>
         </select>
       </div>
-      
+
       <div class="col-3">
         <label for="inputPrice" class="form-label">Price</label>
-        <input type="number" class="form-control" id="inputPrice">
+        <input type="text" class="form-control" id="inputPrice" step="0.01">
       </div>
-      
+
 
     </div>
     <button type="button" class="btn btn-primary" onclick="clickAddMoveis()" style="float: right;">+ Add</button>
@@ -156,144 +156,171 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzI#"></script>
 
-    <script>
-      // Declara uma função para recuperar produtos do servidor
-      var getProducts = function(){
-          // Cria um novo objeto XMLHttpRequest
-          var xhttp = new XMLHttpRequest();
-  
-          // Define uma função para ser chamada quando o estado da requisição muda
-          xhttp.onreadystatechange = function() {
-              // Verifica se a requisição foi concluída e se o status HTTP é 200 (OK)
-              if (this.readyState == 4 && this.status == 200) {
-                  // Parseia a resposta da requisição como JSON
-                  var products = JSON.parse(xhttp.responseText);
-  
-                  // Constrói e insere as linhas na tabela
-                  buildRows(products)
-              }
-          };
-  
-          // Configura a requisição como GET e define a URL para a API de produtos
-          xhttp.open("GET", "http://localhost:3000/products", true);
-  
-          // Envia a requisição
-          xhttp.send();
+  <script>
+    var listOfProducts = [];
+
+
+    var getProducts = function () {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          listOfProducts = JSON.parse(xhttp.responseText);
+          buildRows(listOfProducts)
+        }
       };
-  
-      // Declara uma função para construir as linhas da tabela
-      var buildRows = function(products){
-          var rows = '';
-          // Itera sobre cada produto
-          for(let product of products){
-              // Cria uma nova linha para cada produto e adiciona as colunas correspondentes
-              rows += '<tr>';
-              rows += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
-              rows += '<td>' + product.title + '</td>';
-              rows += '<td>' + product.description + '</td>';
-              rows += '<td>' + product.category + '</td>';
-              rows += '<td>' + product.price + '</td>';
-               // Adiciona um botão para deletar o produto, que chama a função deleteProduct quando clicado
-              rows += '<td><button onclick="deleteProduct(' + product.id + ')">Delete</button></td>';
-              rows += '</tr>';
-          }
-          
-          // Insere as linhas na tabela
-          document.getElementsByTagName("tbody")[0].innerHTML = rows;
+      xhttp.open("GET", "http://localhost:3000/products", true);
+      xhttp.send();
+    };
+
+    var clickAddMoveis = function () {
+
+      // Encontra o maior ID existente
+      let maxId = Math.max(...listOfProducts.map(p => p.id));
+
+      var newProduct = {
+        id: ++maxId, // Aqui está a geração do novo ID
+        thumbnail: document.getElementById("inputThumbnail").value,
+        title: document.getElementById("inputTitle").value,
+        description: document.getElementById("inputDescription").value,
+        category: document.getElementById("inputCategory").value,
+        price: document.getElementById("inputPrice").value,
       };
-  
-      // Declara uma função para deletar um produto
-      var deleteProduct = function(id){
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-                  // Exibe um alerta com a resposta do servidor
-                  alert(xhttp.responseText)
-              }
-          };
-          // Configura a requisição como POST e define a URL para a API de deletar produto
-          xhttp.open("POST", "http://localhost:3000/deleteProduct", true);
-          // Define o header Content-Type como JSON
-          xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-          // Envia a requisição com o id do produto como corpo
-          xhttp.send(JSON.stringify({id: id}));
+      insertProduct(newProduct);
+    };
+
+    var insertProduct = function (product) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          let product = JSON.parse(xhttp.responseText);
+          buildNewRow(product)
+        }
       };
+      xhttp.open("POST", "http://localhost:3000/addProduct", true);
+      xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+      xhttp.send(JSON.stringify(product));
+    };
 
-      function clickAddMoveis() {
-  // Obtém os valores dos campos de entrada
-  var thumbnail = document.getElementById('inputThumbnail').value;
-  var title = document.getElementById('inputTitle').value;
-  var description = document.getElementById('inputDescription').value;
-  var category = document.getElementById('inputCategory').value;
-  var price = document.getElementById('inputPrice').value;
+    var clickDeleteProduct = function (id) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          // Remove a linha do produto da tabela do cliente
+          var rowToRemove = document.getElementById("product-id-" + id);
+          rowToRemove.parentNode.removeChild(rowToRemove);
+        }
+      };
+      xhttp.open("POST", "http://localhost:3000/deleteProduct", true);
+      xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+      xhttp.send(JSON.stringify({ id: id }));
+    };
 
-  // Cria um objeto de produto com os valores fornecidos
-  var newProduct = {
-    thumbnail: thumbnail,
-    title: title,
-    description: description,
-    category: category,
-    price: price
-  };
 
-  // Envia o novo produto para o servidor
-  sendNewProductToServer(newProduct);
-}
+    var buildNewRow = function (product) {
+      var rows = document.getElementsByTagName("tbody")[0].innerHTML ?? '';
+      var newRow = '';
+      newRow += '<tr>';
+      newRow += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+      newRow += '<td>' + product.title + '</td>';
+      newRow += '<td>' + product.description + '</td>';
+      newRow += '<td>' + product.category + '</td>';
+      newRow += '<td>' + product.price + '</td>';
+      newRow += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">x</button> </td>';
+      newRow += '</tr>';
 
-function sendNewProductToServer(newProduct) {
-  // Cria um novo objeto XMLHttpRequest
-  var xhttp = new XMLHttpRequest();
-
-  // Define uma função para ser chamada quando o estado da requisição muda
-  xhttp.onreadystatechange = function () {
-    // Verifica se a requisição foi concluída e se o status HTTP é 200 (OK)
-    if (this.readyState == 4 && this.status == 200) {
-      // Exibe um alerta com a resposta do servidor
-      alert(xhttp.responseText);
-
-      // Verifica se o produto foi adicionado com sucesso
-      if (xhttp.responseText === 'OK') {
-        // Cria uma nova linha para o novo produto
-        var newRow = document.createElement('tr');
-        newRow.innerHTML = `
-          <td><img class="thumbnail" src="${newProduct.thumbnail}"></td>
-          <td>${newProduct.title}</td>
-          <td>${newProduct.description}</td>
-          <td>${newProduct.category}</td>
-          <td>${newProduct.price}</td>
-          <td><button onclick="deleteProduct(${newProduct.id})">Delete</button></td>
-        `;
-
-        // Obtém a tabela de produtos e adiciona a nova linha no final
-        var tableBody = document.querySelector('.table tbody');
-        tableBody.appendChild(newRow);
-
-        // Limpa os campos de entrada após adicionar o produto
-        document.getElementById('inputThumbnail').value = '';
-        document.getElementById('inputTitle').value = '';
-        document.getElementById('inputDescription').value = '';
-        document.getElementById('inputCategory').value = '';
-        document.getElementById('inputPrice').value = '';
-      }
+      document.getElementsByTagName("tbody")[0].innerHTML = rows + newRow
     }
-  };
 
-  // Configura a requisição como POST e define a URL para adicionar um produto
-  xhttp.open('POST', 'http://localhost:3000/addProduct', true);
-  // Define o header Content-Type como JSON
-  xhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-  // Envia a requisição com o novo produto como corpo
-  xhttp.send(JSON.stringify(newProduct));
-}
+    var buildRows = function (prods) {
+      var rows = '';
+      for (let product of prods) {
+        rows += '<tr data-p-id="product-id-' + product.id + '" id="product-id-' + product.id + '">';
+        rows += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+        rows += '<td>' + product.title + '</td>';
+        rows += '<td>' + product.description + '</td>';
+        rows += '<td>' + product.category + '</td>';
+        rows += '<td>' + product.price + '</td>';
+        rows += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
+        rows += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
+        rows += '</tr>';
+      }
 
-  
-      // Adiciona um evento para quando o DOM estiver completamente carregado
-      document.addEventListener("DOMContentLoaded", () => {
-          // Chama a função para obter os produtos
-          getProducts();
-      }); 
-  
+      document.getElementsByTagName("tbody")[0].innerHTML = rows;
+    };
+
+    var clickEditProduct = function (id) {
+      let product = listOfProducts.find(i => i.id === id);
+
+      let editRow = '';
+      editRow += '<td> <input type="text" id="edit-thumbnail" value="' + product.thumbnail + '"></td>';
+      editRow += '<td> <input type="text" id="edit-title" value="' + product.title + '"></td>';
+      editRow += '<td> <input type="text" id="edit-description" value="' + product.description + '"></td>';
+      editRow += '<td> <select type="text" id="edit-category">'
+        editRow += ' <option disabled selected style="display:none;">'+ product.category +'</option>'
+        editRow +=  ' <option value="suprimentos_de_escritorio">suprimentos_de_escritorio</option>'
+        editRow +=  ' <option value="moveis">Móveis</option>'
+        editRow +=  ' <option value="eletronicos">Eletrônicos</option>'
+        editRow +=  ' <option value="promocoes">Promoções</option>'
+        editRow +=  '</select>'
+        editRow +=  '</td>';
+
+      editRow += '<td> <input type="text" id="edit-price" value="' + product.price + '"></td>';
+      editRow += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
+      editRow += '<button type="button" class="btn btn-success btn-sm" onclick="clickUpdateProduct(' + product.id + ')">Alterar</button> </td>';
+      document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = editRow;
+    };
+
+    var clickUpdateProduct = function (id) {
+      let product = {
+        id: id,
+        thumbnail: document.getElementById("edit-thumbnail").value,
+        title: document.getElementById("edit-title").value,
+        description: document.getElementById("edit-description").value,
+        category: document.getElementById("edit-category").value,
+        price: document.getElementById("edit-price").value
+      };
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          let updatedProduct = JSON.parse(xhttp.responseText);
+          var updatedRow = '';
+          updatedRow += '<td> <img class="thumbnail" src="' + updatedProduct.thumbnail + '"></td>';
+          updatedRow += '<td>' + updatedProduct.title + '</td>';
+          updatedRow += '<td>' + updatedProduct.description + '</td>';
+          updatedRow += '<td>' + updatedProduct.category + '</td>';
+          updatedRow += '<td>' + updatedProduct.price + '</td>';
+          updatedRow += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + updatedProduct.id + ')">Cancelar</button>';
+          updatedRow += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + updatedProduct.id + ')">Alterar</button> </td>';
+          document.querySelector('[data-p-id="product-id-' + updatedProduct.id + '"]').innerHTML = updatedRow;
+        }
+      };
+      xhttp.open("POST", "http://localhost:3000/updateProduct", true);
+      xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+      xhttp.send(JSON.stringify(product));
+    };
+
+    var cancelUpdate = function (id) {
+      let product = listOfProducts.find(i => i.id === id);
+      var row = '';
+      row += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+      row += '<td>' + product.title + '</td>';
+      row += '<td>' + product.description + '</td>';
+      row += '<td>' + product.category + '</td>';
+      row += '<td>' + product.price + '</td>';
+      row += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
+      row += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
+      document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = row;
+    };
+
+    // Adiciona um evento para quando o DOM estiver completamente carregado
+    document.addEventListener("DOMContentLoaded", () => {
+      // Chama a função para obter os produtos
+      getProducts();
+    });
+
   </script>
+
 
 
 </body>

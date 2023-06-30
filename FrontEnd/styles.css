@@ -85,7 +85,6 @@ box-shadow: none;
 
 
 
-
 /* css para pagina de index --> pagina index.html botao login */
 header button {
   background-color: red;
@@ -98,7 +97,6 @@ header {
 
 
 /*  admin */
-
 .hide-content {
   display: none;
 }

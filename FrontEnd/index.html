@@ -61,7 +61,7 @@
       <button type="button" class="clear" id="logout-button" onclick="logout()">Sair</button>
     </nav>
   </header>
-  <!-- Início do menu de produtos -->
+  
   <!-- Início do menu de produtos -->
   <ul class="nav justify-content-center produtos">
     <!-- Link para a seção de Suprimentos de escritório -->
@@ -90,29 +90,21 @@
       <div class="row" id="productRow-suprimentos_de_escritorio">
         <!-- Produtos vão aqui -->
       </div>
-    </div>
-  </div>
 
-  <div class="container">
-    <div id="produtos">
       <div class="row" id="productRow-moveis">
         <!-- Produtos vão aqui -->
       </div>
-    </div>
-  </div>
 
-  <div class="container">
-    <div id="produtos">
       <div class="row" id="productRow-eletronicos">
         <!-- Produtos vão aqui -->
       </div>
-    </div>
-  </div>
 
-  <div class="container">
-    <div id="produtos">
       <div class="row" id="productRow-promocoes">
         <!-- Produtos vão aqui -->
+      </div>
+
+      <div class="row" id="productRow-produto_sozinho">
+        <!-- Produtos Separados -->
       </div>
     </div>
   </div>
@@ -155,6 +147,7 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzI#"></script>
 
   <script>
+
     // Declara uma função para recuperar produtos do servidor
     var getProducts = function () {
       var xhttp = new XMLHttpRequest();
@@ -171,6 +164,7 @@
     };
 
     function buildCards(products) {
+      
       var cards = {
         'suprimentos_de_escritorio': '',
         'moveis': '',
@@ -183,39 +177,44 @@
         var images = product.images;
         var carouselId = 'carousel' + product.id;
 
-        var card = `<div class="col-md-6 col-lg-4">
+        var card = `
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
             <div class="card">
-              <div id="${carouselId}" class="carousel" >
+              <div id="${carouselId}" class="carousel">
                 <div class="carousel-inner">
                   ${Array.isArray(images) ? images.map(function (image, index) {
-                    return `<div class="carousel-item ${index === 0 ? 'active' : ''}">
-                    <img class="d-block w-100 thumbnail lazy card-img-top" data-src="${image}" alt="Image ${index + 1}">
-            </div>`;
-            }).join('') : ''}
+                    return `
+                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                      <img class="d-block w-100 thumbnail lazy card-img-top" data-src="${image}" alt="Image ${index + 1}">
+                    </div>`;
+                  }).join('') : ''}
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <a class="carousel-control-prev" href="#${carouselId}" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#${carouselId}" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                  <h5 class="card-title">${product.title}</h5>
+                  <p class="card-text flex-grow-1">${product.description}</p>
+                  <div class="botao-div mt-auto">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-primary produtos-letra" data-section="produto_sozinho" onclick="selectNavItem(event)" data-product-id="${product.id}">Ver+</a>
+                  </div>
+                </div>
               </div>
-              <div class="card-body">
-              <a class="carousel-control-prev" href="#${carouselId}" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#${carouselId}" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-              <h5 class="card-title">${product.title}</h5>
-              <p class="card-text">${product.description}</p>
-              <p>${product.category}</p>
-              <a href="#" class="btn btn-primary">Comprar</a>
             </div>
-            </div>
-          </div>
-        </div>`;
+          </div>`;
+
 
         if (cards[product.category] !== undefined) {
           cards[product.category] += card;
         }
       }
-
+      console.log(product);
       // Após acumular todos os cards, adicione-os ao DOM
       for (var category in cards) {
         document.getElementById('productRow-' + category).innerHTML = cards[category];
@@ -254,40 +253,71 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-      getProducts();
-    });
-
-
 
 
     function selectNavItem(event) {
-      event.preventDefault();
+    event.preventDefault();
 
-      var navItems = document.querySelectorAll('.nav-link.produtos-letra');
-      navItems.forEach(function (navItem) {
+    var navItems = document.querySelectorAll('.nav-link.produtos-letra');
+    navItems.forEach(function (navItem) {
         navItem.classList.remove('active');
-      });
+    });
 
-      event.target.classList.add('active');
+    event.target.classList.add('active');
 
-      var category = event.target.dataset.section;
+    var category = event.target.dataset.section;
 
-      var productRows = document.querySelectorAll('[id^="productRow-"]');
-      productRows.forEach(function (row) {
+    var productRows = document.querySelectorAll('[id^="productRow-"]');
+    productRows.forEach(function (row) {
         row.style.display = 'none';
-      });
+    });
 
-      var selectedProductRow = document.getElementById('productRow-' + category);
-      if (selectedProductRow) {
+    var selectedProductRow = document.getElementById('productRow-' + category);
+    if (selectedProductRow) {
         selectedProductRow.style.display = 'flex';
-      }
     }
+
+    if (category === 'produto_sozinho') {
+        var productID = event.target.getAttribute('data-product-id'); 
+        buildProductDOM(productID);
+    }
+}
+
+function buildProductDOM(productID) {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var product = JSON.parse(xhttp.responseText);
+            var productDOM = `
+                <div class="col-12">
+                    <div class="card">
+                        <img class="card-img-top" src="${product.image}" alt="${product.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <a href="#" class="btn btn-primary">Comprar</a>
+                        </div>
+                    </div>
+                </div>`;
+
+            document.getElementById('productRow-produto_sozinho').innerHTML = productDOM;
+        }
+    };
+
+    xhttp.open("GET", `http://localhost:3000/products/${productID}`, true);
+    xhttp.send();
+}
+
+
 
     document.addEventListener('DOMContentLoaded', function () {
       selectNavItem({ target: document.querySelector('.nav-link.produtos-letra.active'), preventDefault: function () { } });
       getProducts();
     });
+
+
+
 
   </script>
 </body>
