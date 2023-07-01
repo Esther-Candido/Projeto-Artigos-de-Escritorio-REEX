@@ -70,6 +70,8 @@ function alternarBottonsDesabilitados(){
 }
 
 
+
+
 //função para realização do login do usuario comum e o admin!
 function login() {
     showLoading();
@@ -101,6 +103,15 @@ function login() {
             hideLoading();
             alert(getErrorMessage(error));
         });
+}
+
+
+
+//função para quando o usuario usar o enter do teclado depois de colocar email e senha, ativar automaticamente o botao de ENTRAR como se fosse um clique..
+function cliqueenter(event) {
+    if (event.keyCode === 13 ) {   //keycode 13 é o numero da tecla do enter
+        document.getElementById("login-button").click();
+    }
 }
 
 
