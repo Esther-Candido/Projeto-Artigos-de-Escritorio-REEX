@@ -16,6 +16,7 @@
 
      <!--direcionamento para o js da pagina index.html do login-->
      <script src="../login/pages/home/home.js"></script>
+   
 
      
   <title>REEX OFICCE</title>
@@ -40,10 +41,10 @@
       <!-- Itens da barra de navegação -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <!-- Link para a seção Login -->
+          <!-- Link para a seção Login -->      
           <li class="nav-item">
-            <a class="nav-link" href="../login/index.html">Login</a>
-          </li>         
+            <a class="nav-link" id="login-link" href="../login/index.html">Login</a>
+          </li>
           <!-- Link para a seção Home --> 
           <li class="nav-item">
             <a class="nav-link" href="#home">Home</a>
@@ -58,7 +59,8 @@
           </li>
         </ul>
       </div>
-      <button type="button" class="clear" id="logout-button" onclick="logout()">Sair</button>
+      <button type="button" class="clear" id="logout-button" onclick="logout()" style="display: none;">Sair</button>
+
     </nav>
   </header>
   

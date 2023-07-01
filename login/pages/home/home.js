@@ -9,11 +9,18 @@ function logout() {
 }
 
 
-//esconder o botao de sair ao fazer logout
+
+
 firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-        document.getElementById("logout-button").style.display = "none"; // Oculta o botão de sair
-    } else {
+    if (user) {
         document.getElementById("logout-button").style.display = "block"; // Exibe o botão de sair
+        document.getElementById("login-link").style.display = "none"; // Oculta o link de login
+    } else {
+        document.getElementById("logout-button").style.display = "none"; // Oculta o botão de sair
+        document.getElementById("login-link").style.display = "block"; // Exibe o link de login
     }
 });
+
+
+
+
