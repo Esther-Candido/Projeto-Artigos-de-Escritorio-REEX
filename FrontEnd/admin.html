@@ -16,7 +16,6 @@
 
     <!--direcionamento para o js da pagina admin.html do login-->
      <script src="../login/pages/home_2admin/home2.js"></script>
-    
      
 
 
@@ -44,7 +43,7 @@
           <!-- Link para a seção Login -->
           <li class="nav-item">
             <a class="nav-link" id="login-link" href="../login/index.html">Login</a>
-          </li>  
+          </li>
           <!-- Link para a seção Home -->
           <li class="nav-item">
             <a class="nav-link" href="#home">Home</a>
@@ -67,8 +66,8 @@
     <div class="row mt-3">
 
       <div class="col-3">
-        <label for="inputThumbnail" class="form-label">Thumbnail</label>
-        <input type="text" class="form-control" id="inputThumbnail">
+        <label for="inputImagens" class="form-label">Imagens</label>
+        <input type="text" class="form-control" id="inputImagens" onkeydown="addImage(event)">
       </div>
       <div class="col-3">
         <label for="inputTitle" class="form-label">Title</label>
@@ -94,6 +93,44 @@
         <input type="text" class="form-control" id="inputPrice" step="0.01">
       </div>
 
+      <div id="imageList"></div>
+      
+      <style>
+        #imageList{
+          display: flex;
+          justify-content: flex-end;
+          flex-wrap: nowrap;
+          flex-direction: row;
+          align-items: flex-end;
+        }
+        .imageList{
+          object-fit: cover;
+          background-color: white;
+          width: 70px;
+          height: 60px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          
+        }
+        .imageItem{
+          margin-left: 5px;
+        }
+
+        .deleteButton{
+          transform: translateY(-20px);
+          width: 16px;
+          height: 17px;
+          padding: 0;
+          margin: 0px 0 0 -17px;
+          border: 0 none;
+          border-radius: 100%;
+          font-size: xx-small;
+          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+          color: rgb(255, 255, 255);
+          background-color: red;
+      }
+      </style>
 
     </div>
     <button type="button" class="btn btn-primary" onclick="clickAddMoveis()" style="float: right;">+ Add</button>
@@ -159,6 +196,7 @@
 
   <script>
     var listOfProducts = [];
+    let contador = 0;
 
 
     var getProducts = function () {
@@ -178,9 +216,23 @@
       // Encontra o maior ID existente
       let maxId = Math.max(...listOfProducts.map(p => p.id));
 
+      // procurar a imagem com o menor ID possivel
+      let imageElements = document.querySelectorAll("[id^='inputImages-']");
+      let minId = null;
+
+      imageElements.forEach(element => {
+        let id = parseInt(element.id.replace("inputImages-", ""));
+        if (minId === null || id < minId) {
+          minId = id;
+        }
+      });
+
+      console.log("Menor ID:", minId);
+
+
       var newProduct = {
         id: ++maxId, // Aqui está a geração do novo ID
-        thumbnail: document.getElementById("inputThumbnail").value,
+        thumbnail: document.getElementById("inputImages-" + minId).getAttribute("src"),
         title: document.getElementById("inputTitle").value,
         description: document.getElementById("inputDescription").value,
         category: document.getElementById("inputCategory").value,
@@ -200,6 +252,7 @@
       xhttp.open("POST", "http://localhost:3000/addProduct", true);
       xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
       xhttp.send(JSON.stringify(product));
+      contador = 0;
     };
 
     var clickDeleteProduct = function (id) {
@@ -319,6 +372,52 @@
       // Chama a função para obter os produtos
       getProducts();
     });
+
+
+
+
+
+
+
+
+
+    //// javascript fazer imagens arrumar --->>>>>
+
+    function addImage(event) {
+      if (event.keyCode === 13) { // verifica se a tecla pressionada é Enter
+        event.preventDefault(); // impede o comportamento padrão de inserir uma nova linha
+
+        ++ contador ;
+        console.log(contador);
+
+        var imagesInput = document.getElementById("inputImagens");
+        var imageList = document.getElementById("imageList");
+
+        
+        var imageContainer = document.createElement("div");
+        imageContainer.className = "imageItem";
+
+        var image = document.createElement("img");
+        image.className = "imageList inputImages-"+ contador;
+        image.id = "inputImages-"+ contador;
+        image.src = imagesInput.value.trim();
+        imageContainer.appendChild(image);
+
+        var deleteButton = document.createElement("button");
+        deleteButton.className = "deleteButton";
+        deleteButton.innerHTML = "X";
+        deleteButton.addEventListener("click", function() {
+        imageContainer.remove();
+        });
+        imageContainer.appendChild(deleteButton);
+
+        imageList.appendChild(imageContainer);
+
+        imagesInput.value = ""; // Limpa o campo de entrada
+      }
+    }
+
+
 
   </script>
 
