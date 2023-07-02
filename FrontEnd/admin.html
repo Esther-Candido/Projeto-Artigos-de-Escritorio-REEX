@@ -196,8 +196,10 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzI#"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+    crossorigin="anonymous"></script>
+
 
   <script>
     var listOfProducts = [];
@@ -221,19 +223,29 @@
       // Encontra o maior ID existente
       let maxId = Math.max(...listOfProducts.map(p => p.id));
 
-      // procurar a imagem com o menor ID possivel
+      // procurar a imagem com o menor ID e maior ID possivel
       let imageElements = document.querySelectorAll("[id^='inputImages-']");
-      let minId = null;
+      let minId = null; let maxId_image = null;
 
       imageElements.forEach(element => {
         let id = parseInt(element.id.replace("inputImages-", ""));
-        if (minId === null || id < minId) {
+        if (maxId_image === null || id > maxId_image) {
+          maxId_image = id;
+        }
+        if(minId === null || id < minId) {
           minId = id;
         }
       });
 
-      console.log("Menor ID:", minId);
+      let imageUrls = []; // Cria um array para armazenar todas as URLs de imagem
 
+      for (var i = 0; i <= maxId_image; i++) { // O loop fica ate a ultima imagem inserida
+          let imageUrl = document.getElementById("inputImages-" + i);
+          if (imageUrl && imageUrl.getAttribute("src")) { // Verifica se existe uma imagem, se foi excluida nao entra.
+              imageUrls.push(imageUrl.getAttribute("src")); // Adiciona a URL ao array
+          }
+      }
+      
 
       var newProduct = {
         id: ++maxId, // Aqui está a geração do novo ID
@@ -242,7 +254,11 @@
         description: document.getElementById("inputDescription").value,
         category: document.getElementById("inputCategory").value,
         price: document.getElementById("inputPrice").value,
+        images: imageUrls
       };
+
+
+
       insertProduct(newProduct);
     };
 
@@ -280,6 +296,7 @@
       var newRow = '';
       newRow += '<tr>';
       newRow += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+      newRow += '<td> <img class="images" src="' + product.images + '"></td>';
       newRow += '<td>' + product.title + '</td>';
       newRow += '<td>' + product.description + '</td>';
       newRow += '<td>' + product.category + '</td>';
@@ -392,8 +409,8 @@
       if (event.keyCode === 13) { // verifica se a tecla pressionada é Enter
         event.preventDefault(); // impede o comportamento padrão de inserir uma nova linha
 
+        // Conta as imagens inseridas
         ++ contador ;
-        console.log(contador);
 
         var imagesInput = document.getElementById("inputImagens");
         var imageList = document.getElementById("imageList");

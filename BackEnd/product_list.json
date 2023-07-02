@@ -316,14 +316,6 @@
         "https://i.dummyjson.com/data/products/28/4.jpg",
         "https://i.dummyjson.com/data/products/28/thumbnail.jpg"
       ]
-    },
-    {
-      "id": 29,
-      "thumbnail": "dasd",
-      "title": "asdasdas",
-      "description": "dasdasdas",
-      "category": "eletronicos",
-      "price": "31221"
     }
   ],
   "total": 100,

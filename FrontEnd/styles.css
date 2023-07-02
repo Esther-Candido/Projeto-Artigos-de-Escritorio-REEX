@@ -17,6 +17,26 @@ background-repeat: no-repeat;
 transform: scale(1);
 }
 
+/** Organizar todo o site (footer no final) */
+html {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+.container, .centralize{
+  flex-grow: 1;
+}
+
+.AdicionarCorFooter{
+  margin-top: 2%!important;
+}
 
 
 /* ------------- CARDS ---------------------- */
