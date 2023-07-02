@@ -137,6 +137,42 @@
       }
       </style>
 
+      <style>
+        .divImg-adm{
+          object-fit: cover;
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+        }
+        .img-adm{
+          object-fit: cover;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-color: rgb(0, 0, 0);
+          width: 70px;
+          height: 70px;
+          border: 1px black solid;
+        }
+
+
+        .image-preview{
+          object-fit: cover;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-color: rgb(0, 0, 0);
+          width: 30px;
+          height: 30px;
+          border: 1px black solid;
+        }
+
+        .edit-preview{
+          display: flex;
+          flex-direction: row;
+        }
+      </style>
+
     </div>
     <button type="button" class="btn btn-primary" onclick="clickAddMoveis()" style="float: right;">+ Add</button>
 
@@ -295,8 +331,14 @@
       var rows = document.getElementsByTagName("tbody")[0].innerHTML ?? '';
       var newRow = '';
       newRow += '<tr>';
-      newRow += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
-      newRow += '<td> <img class="images" src="' + product.images + '"></td>';
+
+      newRow += '<td class="divImg-adm">';
+        // Percorrer todo o array de fotos
+      product.images.forEach(function(image) {
+          newRow += '<img class="img-adm" src="' + image + '">';
+      });
+      newRow += '</td>';
+      
       newRow += '<td>' + product.title + '</td>';
       newRow += '<td>' + product.description + '</td>';
       newRow += '<td>' + product.category + '</td>';
@@ -311,7 +353,14 @@
       var rows = '';
       for (let product of prods) {
         rows += '<tr data-p-id="product-id-' + product.id + '" id="product-id-' + product.id + '">';
-        rows += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+
+        rows += '<td class="divImg-adm">';
+        // Percorrer todo o array de fotos
+        product.images.forEach(function(image) {
+          rows += '<img class="img-adm" src="' + image + '">';
+        });
+        rows += '</td>';
+       
         rows += '<td>' + product.title + '</td>';
         rows += '<td>' + product.description + '</td>';
         rows += '<td>' + product.category + '</td>';
@@ -328,7 +377,15 @@
       let product = listOfProducts.find(i => i.id === id);
 
       let editRow = '';
-      editRow += '<td> <input type="text" id="edit-thumbnail" value="' + product.thumbnail + '"></td>';
+
+      editRow += '<td>';
+      for(var i = 0; i < 4; i++) {
+          let imgSrc = product.images[i] || '';
+          editRow += `<div class="edit-preview"><img src="${imgSrc}" class="image-preview" id="image-preview-${i}">`;
+         editRow += `<input type="text" id="edit-images-${i}" value="${imgSrc}" onchange="updateImagePreview(${i})"></div>`;
+      }
+      editRow += '</td>';
+
       editRow += '<td> <input type="text" id="edit-title" value="' + product.title + '"></td>';
       editRow += '<td> <input type="text" id="edit-description" value="' + product.description + '"></td>';
       editRow += '<td> <select type="text" id="edit-category">'
@@ -343,17 +400,30 @@
       editRow += '<td> <input type="text" id="edit-price" value="' + product.price + '"></td>';
       editRow += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
       editRow += '<button type="button" class="btn btn-success btn-sm" onclick="clickUpdateProduct(' + product.id + ')">Alterar</button> </td>';
+      
+      
+      
       document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = editRow;
     };
 
     var clickUpdateProduct = function (id) {
+
+      let imageUrls = []; // Cria um array para armazenar todas as URLs de imagem
+
+      for (var i = 0; i < 4; i++) { // O loop fica ate a ultima imagem inserida
+          let imageUrl = document.getElementById("edit-images-" + i);
+          if (imageUrl.value) { // Verifica se existe uma imagem, se foi excluida nao entra.
+              imageUrls.push(imageUrl.value);  // Adiciona a URL ao array
+          }
+      }
+
       let product = {
         id: id,
-        thumbnail: document.getElementById("edit-thumbnail").value,
         title: document.getElementById("edit-title").value,
         description: document.getElementById("edit-description").value,
         category: document.getElementById("edit-category").value,
-        price: document.getElementById("edit-price").value
+        price: document.getElementById("edit-price").value,
+        images: imageUrls
       };
 
       var xhttp = new XMLHttpRequest();
@@ -361,7 +431,15 @@
         if (this.readyState == 4 && this.status == 200) {
           let updatedProduct = JSON.parse(xhttp.responseText);
           var updatedRow = '';
-          updatedRow += '<td> <img class="thumbnail" src="' + updatedProduct.thumbnail + '"></td>';
+          
+          updatedRow += '<td class="divImg-adm">';
+            // Percorrer todo o array de fotos
+          updatedProduct.images.forEach(function(image) {
+            updatedRow += '<img class="img-adm" src="' + image + '">';
+          });
+          updatedRow += '</td>';
+
+
           updatedRow += '<td>' + updatedProduct.title + '</td>';
           updatedRow += '<td>' + updatedProduct.description + '</td>';
           updatedRow += '<td>' + updatedProduct.category + '</td>';
@@ -379,7 +457,14 @@
     var cancelUpdate = function (id) {
       let product = listOfProducts.find(i => i.id === id);
       var row = '';
-      row += '<td> <img class="thumbnail" src="' + product.thumbnail + '"></td>';
+
+      row += '<td class="divImg-adm">';
+            // Percorrer todo o array de fotos
+      product.images.forEach(function(image) {
+        row += '<img class="img-adm" src="' + image + '">';
+      });
+      row += '</td>';
+
       row += '<td>' + product.title + '</td>';
       row += '<td>' + product.description + '</td>';
       row += '<td>' + product.category + '</td>';
@@ -401,6 +486,12 @@
 
 
 
+    //imagens miniatura, no upload
+    function updateImagePreview(index) {
+      let imageUrl = document.getElementById('edit-images-' + index).value;
+      let imgElement = document.getElementById('image-preview-' + index);
+      imgElement.src = imageUrl;
+  }
 
 
     //// javascript fazer imagens arrumar --->>>>>
