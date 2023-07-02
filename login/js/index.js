@@ -106,7 +106,6 @@ function login() {
 }
 
 
-
 //função para quando o usuario usar o enter do teclado depois de colocar email e senha, ativar automaticamente o botao de ENTRAR como se fosse um clique..
 function cliqueenter(event) {
     if (event.keyCode === 13 ) {   //keycode 13 é o numero da tecla do enter
@@ -175,6 +174,7 @@ function recoverPassword() {
     })
 
 }
+
 
 
 

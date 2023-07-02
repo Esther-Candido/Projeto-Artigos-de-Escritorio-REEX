@@ -14,6 +14,10 @@ function showLoading(){
 
 }
 
+
+
+
+
 function hideLoading() {
     //encontrar o componente pela class, ou seja encontrar o loading...
     const loadings = document.getElementsByClassName("loading");

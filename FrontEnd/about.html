@@ -17,6 +17,7 @@
 
      <!--direcionamento para o js da pagina index.html do login-->
      <script src="../login/pages/home/home.js"></script>
+     <script src="../login/pages/home_2admin/aparecerAdmin.js"></script>
 
      
   <title>REEX OFICCE - ABOUT US</title>
@@ -42,7 +43,6 @@
 </head>
 
 <body>
-
 <!--cabeçalho geral -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,10 +57,8 @@
       <!-- Itens da barra de navegação -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <!-- Link para a seção Login -->
-          <li class="nav-item">
-            <a class="nav-link" id="login-link" href="../login/index.html">Login</a>
-          </li>
+
+
           <!-- Link para a seção Home --> 
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
@@ -73,9 +71,20 @@
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact Us</a>
           </li>
+        <!-- Link para a seção Login -->
+          <li class="nav-item">
+            <!--<a class="nav-link" id="login-link" href="../login/index.html">Login</a>-->
+            <a class="nav-link initially-hidden" id="login-link" href="../login/index.html">Login</a>
+          </li>
+
+        <!--pagina home Admin-->
+        <li class="nav-item">
+          <a  class="nav-link initially-hidden" id="admin-link" href="admin.html" >Admin</a>
+        </li>
+
         </ul>
       </div>
-      <button type="button" class="clear" id="logout-button" onclick="logout()" style="display: none;">Sair</button>
+      <button type="button" class="clear" id="logout-button" onclick="logout()">Sair</button>
     </nav>
   </header>
   

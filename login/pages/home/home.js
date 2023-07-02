@@ -12,14 +12,34 @@ function logout() {
 
 
 firebase.auth().onAuthStateChanged(user => {
+    var logoutButton = document.getElementById("logout-button");
+    var loginLink = document.getElementById("login-link");
+
+    logoutButton.classList.remove("initially-hidden");
+    loginLink.classList.remove("initially-hidden");
+
     if (user) {
-        document.getElementById("logout-button").style.display = "block"; // Exibe o botão de sair
-        document.getElementById("login-link").style.display = "none"; // Oculta o link de login
+        logoutButton.style.display = "block";// Exibe o botão de sair
+        loginLink.style.display = "none"; // Oculta o link de login
     } else {
-        document.getElementById("logout-button").style.display = "none"; // Oculta o botão de sair
-        document.getElementById("login-link").style.display = "block"; // Exibe o link de login
+        logoutButton.style.display = "none";// Oculta o botão de sair
+        loginLink.style.display = "block";// Exibe o link de login
     }
 });
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
 
 
 

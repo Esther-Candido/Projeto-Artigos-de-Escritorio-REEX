@@ -121,3 +121,9 @@ header {
 .hide-content {
   display: none;
 }
+
+
+.initially-hidden {
+  display: none;
+}
+
