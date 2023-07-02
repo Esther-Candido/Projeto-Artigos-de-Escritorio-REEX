@@ -1,14 +1,5 @@
-/*
-  firebase.auth().onAuthStateChanged(user => {
-    var adminlink = document.getElementById("admin-link");
-    adminlink.classList.remove("initially-hidden");
 
-    if (user) {
-        adminlink.style.display = "block";
-    } else {
-        adminlink.style.display = "none";
-    }
-  });*/
+
 
 
   firebase.auth().onAuthStateChanged(user => {
