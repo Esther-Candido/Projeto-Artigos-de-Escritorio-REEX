@@ -14,6 +14,7 @@ firebase.auth().onAuthStateChanged(user => {
     var logoutButton = document.getElementById("logout-button");
     var loginLink = document.getElementById("login-link");
     var adminlink = document.getElementById("admin-link");
+    
     adminlink.classList.remove("initially-hidden");
 
     logoutButton.classList.remove("initially-hidden");

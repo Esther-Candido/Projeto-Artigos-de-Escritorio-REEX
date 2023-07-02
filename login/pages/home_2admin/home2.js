@@ -45,24 +45,28 @@ function logout() {
     });
   }
 
- 
 
 
 firebase.auth().onAuthStateChanged(user => {
   var logoutButton = document.getElementById("logout-button");
   var loginLink = document.getElementById("login-link");
+  var adminlink = document.getElementById("admin-link");
+  
+  adminlink.classList.remove("initially-hidden");
 
   logoutButton.classList.remove("initially-hidden");
   loginLink.classList.remove("initially-hidden");
 
   if (user) {
-      logoutButton.style.display = "block";
-      loginLink.style.display = "none";
+      logoutButton.style.display = "block";// Exibe o botão de sair
+      loginLink.style.display = "none"; // Oculta o link de login
+      adminlink.style.display = "none";
   } else {
-      logoutButton.style.display = "none";
-      loginLink.style.display = "block";
+      logoutButton.style.display = "none";// Oculta o botão de sair
+      loginLink.style.display = "block";// Exibe o link de login
   }
 });
+
 
 
 

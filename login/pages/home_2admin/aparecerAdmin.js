@@ -1,8 +1,4 @@
-
-
-
-
-  firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged(user => {
     var adminlink = document.getElementById("admin-link");
     adminlink.classList.remove("initially-hidden");
 
