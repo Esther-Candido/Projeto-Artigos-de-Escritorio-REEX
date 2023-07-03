@@ -147,9 +147,12 @@ box-shadow: none;
 
 .carousel-control-next, .carousel-control-prev {
   height: 200px;
+  
 }
 
-
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  background-color: #5658558d;
+}
 /* css para pagina de index --> pagina index.html botao login */
 header button {
   background-color: red;
