@@ -83,21 +83,21 @@
           onkeydown="addImage(event)">
       </div>
       <div class="col-12 col-md-6 margin-div">
-        <label for="inputTitle" class="form-label">Title</label>
-        <input type="text" class="form-control" id="inputTitle" required>
+        <label for="inputTitle" class="form-label">Título</label>
+        <input type="text" class="form-control" id="inputTitle" maxlength="30" required>
       </div>
 
       <div class="col-12 col-md-6 margin-div">
-        <label for="inputDescription" class="form-label">Description</label>
+        <label for="inputDescription" class="form-label">Descrição</label>
         <textarea class="form-control" id="inputDescription" maxlength="250" rows="3" required></textarea>
       </div>
 
       <div id="imageList"></div>
 
       <div class="col-12 col-md-3 margin-div">
-        <label for="inputCategory" class="form-label">Category</label>
+        <label for="inputCategory" class="form-label">Categoria</label>
         <select class="form-control" id="inputCategory">
-          <option value="suprimentos_de_escritorio">Suprimentos de Escritório</option>
+          <option value="suprimentos_de_escritorio">Escritório</option>
           <option value="moveis">Móveis</option>
           <option value="eletronicos">Eletrônicos</option>
           <option value="promocoes">Promoções</option>
@@ -105,7 +105,7 @@
       </div>
 
       <div class="col-12 col-md-3 margin-div">
-        <label for="inputPrice" class="form-label">Price</label>
+        <label for="inputPrice" class="form-label">Preço</label>
         <input type="number" class="form-control" id="inputPrice" step="0.01">
       </div>
 
@@ -283,12 +283,12 @@
         <table class="table">
           <thead>
             <tr>
-              <td data-label="Images" class="divImg-adm">Images</td>
-              <td data-label="Title">Title</td>
-              <td data-label="Description">Description</td>
-              <td data-label="Category">Category</td>
-              <td data-label="Price">Price</td>
-              <td data-label="Actions">Actions</td>
+              <td data-label="Images" class="divImg-adm">Imagens</td>
+              <td data-label="Title">Título</td>
+              <td data-label="Description">Descrição</td>
+              <td data-label="Category">Categoria</td>
+              <td data-label="Price">Preço</td>
+              <td data-label="Actions">Modificação</td>
             </tr>
           </thead>
           <tbody>
@@ -369,8 +369,8 @@
       }
 
       // Verifica se o título foi inserido e tem menos de 25 caracteres
-      if (titleInput.value === "" || titleInput.value.length > 25) {
-        alert('O título é obrigatório e não pode ter mais de 25 caracteres.');
+      if (titleInput.value === "" || titleInput.value.length > 30) {
+        alert('O título é obrigatório e não pode ter mais de 30 caracteres.');
         return;
       }
 
@@ -552,8 +552,8 @@
       var editdescription = document.getElementById('edit-description');
       var editprice = document.getElementById('edit-price');
 
-      if (edittitle.value === "" || edittitle.value.length > 25) {
-        alert('O título é obrigatório e não pode ter mais de 25 caracteres.');
+      if (edittitle.value === "" || edittitle.value.length > 30) {
+        alert('O título é obrigatório e não pode ter mais de 30 caracteres.');
         return;
       }
       if (editdescription.value === "" || editdescription.value.length > 250) {
