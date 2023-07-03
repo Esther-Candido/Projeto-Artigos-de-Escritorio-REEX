@@ -352,7 +352,7 @@
       }
 
       // Verifica se o título foi inserido e tem menos de 25 caracteres
-      if (titleInput.value === "" || titleInput.value.length > 30) {
+      if (titleInput.value === "" || titleInput.value.length > 25) {
         alert('O título é obrigatório e não pode ter mais de 25 caracteres.');
         return;
       }
@@ -362,6 +362,7 @@
         alert('A descrição é obrigatória e não pode ter mais de 250 caracteres.');
         return;
       }
+     
 
       // Verifica se o preço foi inserido
       if (priceInput.value === "") {
@@ -394,6 +395,8 @@
           imageUrls.push(imageUrl.getAttribute("src")); // Adiciona a URL ao array
         }
       }
+
+      
 
 
       var newProduct = {
@@ -454,7 +457,7 @@
       newRow += '<td data-label="Title">' + product.title + '</td>';
       newRow += '<td data-label="Description">' + product.description + '</td>';
       newRow += '<td data-label="Category">' + product.category + '</td>';
-      newRow += '<td data-label="Price">' + product.price + '</td>';
+      newRow += '<td data-label="Price">' + product.price +"€"+'</td>';
       newRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">x</button> </td>';
       newRow += '</tr>';
 
@@ -477,7 +480,7 @@
         rows += '<td data-label="Title">' + product.title + '</td>';
         rows += '<td data-label="Description">' + product.description + '</td>';
         rows += '<td data-label="Category">' + product.category + '</td>';
-        rows += '<td data-label="Price">' + product.price + '</td>';
+        rows += '<td data-label="Price">' + product.price +"€"+ '</td>';
         rows += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
         rows += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
         rows += '</tr>';
@@ -495,12 +498,12 @@
       for (var i = 0; i < 4; i++) {
         let imgSrc = product.images[i] || '';
         editRow += `<div class="edit-preview"><img src="${imgSrc}" class="image-preview" id="image-preview-${i}">`;
-        editRow += `<input type="text" id="edit-images-${i}" value="${imgSrc}" onchange="updateImagePreview(${i})"></div>`;
+        editRow += `<input type="text" class="imageEdit" id="edit-images-${i}" value="${imgSrc}" onchange="updateImagePreview(${i})"></div>`;
       }
       editRow += '</td>';
 
-      editRow += '<td data-label="Title"> <input type="text" id="edit-title" value="' + product.title + '"></td>';
-      editRow += '<td data-label="Description"> <input type="text" id="edit-description" value="' + product.description + '"></td>';
+      editRow += '<td data-label="Title"> <input type="text" id="edit-title" maxlength="25" required value="' + product.title + '"></td>';
+      editRow += '<td data-label="Description"> <textarea type="text" id="edit-description" maxlength="250" rows="3" required value="' + product.description + '">'+ product.description + '</textarea></td>';
       editRow += '<td data-label="Category"> <select type="text" id="edit-category">'
       editRow += ' <option disabled selected style="display:none;">' + product.category + '</option>'
       editRow += ' <option value="suprimentos_de_escritorio">suprimentos_de_escritorio</option>'
@@ -509,8 +512,8 @@
       editRow += ' <option value="promocoes">Promoções</option>'
       editRow += '</select>'
       editRow += '</td>';
-
-      editRow += '<td data-label="Price"> <input type="text" id="edit-price" value="' + product.price + '"></td>';
+      
+      editRow += '<td data-label="Price"> <input type="number" id="edit-price" value="' + product.price + '"></td>';
       editRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
       editRow += '<button type="button" class="btn btn-success btn-sm" onclick="clickUpdateProduct(' + product.id + ')">Alterar</button> </td>';
 
@@ -519,6 +522,25 @@
 
 
     var clickUpdateProduct = function (id) {
+
+      var edittitle = document.getElementById('edit-title');
+      var editdescription = document.getElementById('edit-description');
+      var editprice = document.getElementById('edit-price');
+
+      if (edittitle.value === "" || edittitle.value.length > 25) {
+        alert('O título é obrigatório e não pode ter mais de 25 caracteres.');
+        return;
+      }
+      if (editdescription.value === "" || editdescription.value.length > 250) {
+        alert('A descrição é obrigatória e não pode ter mais de 250 caracteres.');
+        return;
+      }
+
+      // Verifica se o preço foi inserido
+      if (editprice.value === "") {
+        alert('Você precisa inserir um preço.');
+        return;
+      }
 
       let imageUrls = []; // Cria um array para armazenar todas as URLs de imagem
 

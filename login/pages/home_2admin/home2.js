@@ -51,19 +51,24 @@ firebase.auth().onAuthStateChanged(user => {
   var logoutButton = document.getElementById("logout-button");
   var loginLink = document.getElementById("login-link");
   var adminlink = document.getElementById("admin-link");
-  
-  adminlink.classList.remove("initially-hidden");
 
-  logoutButton.classList.remove("initially-hidden");
-  loginLink.classList.remove("initially-hidden");
+  // Adicionando a verificação para cada elemento
+  if(adminlink) adminlink.classList.remove("initially-hidden");
+  if(logoutButton) logoutButton.classList.remove("initially-hidden");
+  if(loginLink) loginLink.classList.remove("initially-hidden");
 
   if (user) {
-      logoutButton.style.display = "block";// Exibe o botão de sair
-      loginLink.style.display = "none"; // Oculta o link de login
-      adminlink.style.display = "none";
+      // Exibe o botão de sair
+      if(logoutButton) logoutButton.style.display = "block";
+      // Oculta o link de login
+      if(loginLink) loginLink.style.display = "none"; 
+      // Oculta o link de admin
+      if(adminlink) adminlink.style.display = "none";
   } else {
-      logoutButton.style.display = "none";// Oculta o botão de sair
-      loginLink.style.display = "block";// Exibe o link de login
+      // Oculta o botão de sair
+      if(logoutButton) logoutButton.style.display = "none";
+      // Exibe o link de login
+      if(loginLink) loginLink.style.display = "block";
   }
 });
 
