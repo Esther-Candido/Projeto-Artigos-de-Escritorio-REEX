@@ -127,3 +127,21 @@ header {
   display: none;
 }
 
+
+.botao-voltar {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: #0e8414;
+  font-size: 24px;
+}
+
+.botao-voltar:hover {
+  background-color: transparent;
+  color: #87ab68;
+}
+
+.botao-voltar:focus {
+  outline: none;
+  box-shadow: none;
+}

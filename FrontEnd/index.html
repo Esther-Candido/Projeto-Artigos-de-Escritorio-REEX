@@ -25,6 +25,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="styles/produtosolo.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -215,7 +216,8 @@
                     <span class="sr-only">Next</span>
                   </a>
                   <h5 class="card-title">${product.title}</h5>
-                  <p class="card-text flex-grow-1">${product.description}</p>
+                  <p class="card-text flex-grow-1">${product.description.slice(0, 100)}</p>
+
                   <div class="botao-div mt-auto">
                     <a href="#" class="btn btn-primary">Comprar</a>
                     <a href="#" class="btn btn-primary produtos-letra" data-section="produto_sozinho" onclick="selectNavItem(event)" data-product-id="${product.id}">Ver+</a>
@@ -317,10 +319,14 @@
         var productDOM = `
             <!-- Início da coluna da imagem do produto -->
             <div class="col-lg-6">
+
                 <!-- Botão de voltar -->
                 <div class="back-arrow">
-                    <a href="#" class="btn btn-primary botao-voltar" onclick="goBackToCategory(event)">Voltar</a>
+                    <button class="btn btn-primary botao-voltar" onclick="goBackToCategory(event)">
+                        <i class="fas fa-arrow-left fa-2x"></i> 
+                    </button>
                 </div>
+
                 <!-- Container da imagem do produto -->
                 <div class="product-image--container">
                     <!-- Imagem principal do produto -->
@@ -340,17 +346,18 @@
                 <div class="titulo-margin">
                     <h1 class="title">${product.title}</h1>
                 </div>
-                <!-- Preço do produto -->
-                <span>
-                    <p>Preço: 
-                        <span class="emphasize">${product.price}</span>
-                    </p>
-                    <!-- Aqui você pode adicionar a quantidade do produto, se houver -->
-                </span>
                 <!-- Descrição do produto -->
                 <div>
                     <p>${product.description}</p>
                 </div>
+                <!-- Preço do produto -->
+                <span>
+                    <p>Preço: 
+                        <span class="emphasize">${product.price}€</span>
+                    </p>
+                    <!-- aqui você pode adicionar a quantidade do produto, futuramente -->
+                </span>
+
                 <!-- Botão de adicionar ao carrinho -->
                 <div>
                     <button class="btn btn-warning my-btn flex-btn">
