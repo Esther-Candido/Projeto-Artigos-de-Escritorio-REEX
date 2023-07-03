@@ -1,7 +1,31 @@
+/* ICON sair e ICON de logado*/
+.fa-right-from-bracket{
+  width: 30px;
+  height: 20px;
+  color: red;
+}
+.botao-sair{
+  background: none;
+  border: none;
+}
+
+
+/*Editar nav altura*/
+.nav-item2{
+  font-size: 25px;
+  font-family: 'Bebas Neue', sans-serif;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
 /* Esta seção define as cores de fundo e de texto para as classes .produtos, .AdicionarCorFooter e os links dentro de .nav-item2 */
 .produtos, .AdicionarCorFooter, .nav-item2 a{
-  background-color:  #e7dbc1;
-  color: rgb(0, 0, 0);
+  background-color: black!important;
+  color: white!important;
+}
+.produtos-letra:hover{
+  color: #1eff00!important;
 }
 
 
@@ -23,6 +47,7 @@ html {
   min-height: 100%;
 }
 body {
+  background-image: url(img/back.png);
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -75,11 +100,6 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 }
-
-
-
-
-
 
 
 /* Esta seção define o estilo do título do card */

@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="r.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <!--link firebase -->
   <!--importar esses links da minha firebase auth-->
@@ -30,7 +33,7 @@
 
 <body class="hide-content">
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light cor-nav">
       <!-- Logo da empresa, link para a página inicial -->
       <a class="navbar-brand" href="#"><img src="Logo.png" alt="" width="50px"></a>
       <!-- Botão para alternar o menu da barra de navegação em telas pequenas -->
@@ -67,7 +70,7 @@
 
         </ul>
       </div>
-      <button type="button" class="clear" id="logout-button" onclick="logout()">Sair</button>
+      <button type="button" class="clear botao-sair" id="logout-button" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
     </nav>
   </header>
 
@@ -107,6 +110,18 @@
 
 
       <style>
+        body{
+          background-image: none;
+          background-color: rgb(255, 255, 255)!important;
+        }
+
+        .cor-nav{
+          background-color: black;
+        }
+
+        .nav-link{
+          color: white!important;
+        }
         .margin-div {
           margin-top: 20px;
         }
@@ -186,7 +201,7 @@
         
 
         tr {
-            border-inline: 2px solid #ececec;
+            border: 2px solid #ececec;
             margin-bottom: 10px;
           }
         @media screen and (min-width: 1200px){
