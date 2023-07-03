@@ -145,6 +145,9 @@ text-overflow: ellipsis;
 box-shadow: none;
 }
 
+.carousel-control-next, .carousel-control-prev {
+  height: 200px;
+}
 
 
 /* css para pagina de index --> pagina index.html botao login */
@@ -172,3 +175,4 @@ header {
 .preco-produto{
   margin-top: 10px;
 }
+
