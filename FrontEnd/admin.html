@@ -7,17 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="r.png">
 
-    <!--link firebase -->
-     <!--importar esses links da minha firebase auth-->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> <!-- (obrigatório para usar Firestore) -->
-     <script src="../login/firebase-init.js"></script>
-     <!--fim links firebase auth-->
+  <!--link firebase -->
+  <!--importar esses links da minha firebase auth-->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!-- (obrigatório para usar Firestore) -->
+  <script src="../login/firebase-init.js"></script>
+  <!--fim links firebase auth-->
 
-    <!--direcionamento para o js da pagina admin.html do login-->
-     <script src="../login/pages/home_2admin/home2.js"></script>
-     
+  <!--direcionamento para o js da pagina admin.html do login-->
+  <script src="../login/pages/home_2admin/home2.js"></script>
+
 
 
   <title>REEX OFICCE - ADMIN</title>
@@ -54,15 +55,15 @@
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact Us</a>
           </li>
-        <!-- Link para a seção Login -->
-        <li class="nav-item">
-          <a class="nav-link initially-hidden" id="login-link" href="../login/index.html">Login</a>
-        </li>
+          <!-- Link para a seção Login -->
+          <li class="nav-item">
+            <a class="nav-link initially-hidden" id="login-link" href="../login/index.html">Login</a>
+          </li>
 
-        <!-- Link para a seção Home -->
-        <li class="nav-item">
-          <a class="nav-link" href="admin.html">admin</a>
-        </li>
+          <!-- Link para a seção Home -->
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">Admin</a>
+          </li>
 
         </ul>
       </div>
@@ -72,21 +73,24 @@
 
   <div class="container">
     <div class="row mt-3">
-
-      <div class="col-3">
+      <div class="col-12 col-md-6 margin-div">
         <label for="inputImagens" class="form-label">Imagens</label>
-        <input type="text" class="form-control" id="inputImagens" onkeydown="addImage(event)">
+        <input type="text" class="form-control" id="inputImagens" placeholder="Enter para enviar a foto"
+          onkeydown="addImage(event)">
       </div>
-      <div class="col-3">
+      <div class="col-12 col-md-6 margin-div">
         <label for="inputTitle" class="form-label">Title</label>
-        <input type="text" class="form-control" id="inputTitle">
-      </div>
-      <div class="col-3">
-        <label for="inputDescription" class="form-label">Description</label>
-        <input type="text" class="form-control" id="inputDescription">
+        <input type="text" class="form-control" id="inputTitle" required>
       </div>
 
-      <div class="col-3">
+      <div class="col-12 col-md-6 margin-div">
+        <label for="inputDescription" class="form-label">Description</label>
+        <textarea class="form-control" id="inputDescription" maxlength="150" rows="3" required></textarea>
+      </div>
+
+      <div id="imageList"></div>
+
+      <div class="col-12 col-md-3 margin-div">
         <label for="inputCategory" class="form-label">Category</label>
         <select class="form-control" id="inputCategory">
           <option value="suprimentos_de_escritorio">Suprimentos de Escritório</option>
@@ -96,70 +100,74 @@
         </select>
       </div>
 
-      <div class="col-3">
+      <div class="col-12 col-md-3 margin-div">
         <label for="inputPrice" class="form-label">Price</label>
-        <input type="text" class="form-control" id="inputPrice" step="0.01">
+        <input type="number" class="form-control" id="inputPrice" step="0.01">
       </div>
 
-      <div id="imageList"></div>
-      
+
       <style>
-        #imageList{
-          display: flex;
-          justify-content: flex-end;
-          flex-wrap: nowrap;
-          flex-direction: row;
-          align-items: flex-end;
+        .margin-div {
+          margin-top: 20px;
         }
-        .imageList{
+
+        #imageList {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-end;
+          flex-direction: row;
+        }
+
+        .imageList {
+          margin-top: 5px;
           object-fit: cover;
           background-color: white;
-          width: 70px;
-          height: 60px;
+          width: 85px;
+          height: 85px;
+          border: 1px black solid;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
-          
         }
-        .imageItem{
+
+        .imageItem {
           margin-left: 5px;
         }
 
-        .deleteButton{
-          transform: translateY(-20px);
+        .deleteButton {
+          transform: translateY(-29px);
           width: 16px;
           height: 17px;
           padding: 0;
-          margin: 0px 0 0 -17px;
+          margin: 0px 0 0 -19px;
           border: 0 none;
           border-radius: 100%;
           font-size: xx-small;
           font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
           color: rgb(255, 255, 255);
           background-color: red;
-      }
-      </style>
+        }
 
-      <style>
-        .divImg-adm{
+        .divImg-adm {
           object-fit: cover;
           display: flex;
           flex-wrap: wrap;
           flex-direction: row;
         }
-        .img-adm{
+
+        .img-adm {
           object-fit: cover;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
           background-color: rgb(0, 0, 0);
-          width: 70px;
-          height: 70px;
+          width: 33px;
+          height: 35px;
           border: 1px black solid;
         }
 
 
-        .image-preview{
+        .image-preview {
           object-fit: cover;
           background-size: cover;
           background-position: center;
@@ -170,9 +178,67 @@
           border: 1px black solid;
         }
 
-        .edit-preview{
+        .edit-preview {
           display: flex;
           flex-direction: row;
+        }
+
+        
+
+        tr {
+            border-inline: 2px solid #ececec;
+            margin-bottom: 10px;
+          }
+        @media screen and (min-width: 1200px){
+          .img-adm {
+          width: calc(50% - 10px); 
+          height: 70px; 
+          }
+        }
+        @media screen and (max-width: 767px) {
+
+          table,
+          thead,
+          tbody,
+          th,
+          td,
+          tr {
+            display: block;
+          }
+
+          thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+          }
+
+          tr {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+          }
+
+          td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+          }
+
+          td::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            margin-right: 100%;
+          }
+
+          .img-adm {
+            width: 48px;
+             height: 50px;
+          }
+
+          .edit-preview {
+            display: inherit;
+          }
         }
       </style>
 
@@ -185,12 +251,12 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Thumbnail</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">Category</th>
-              <th scope="col">Price</th>
-              <th scope="col">Actions</th>
+              <td data-label="Images" class="divImg-adm">Images</td>
+              <td data-label="Title">Title</td>
+              <td data-label="Description">Description</td>
+              <td data-label="Category">Category</td>
+              <td data-label="Price">Price</td>
+              <td data-label="Actions">Actions</td>
             </tr>
           </thead>
           <tbody>
@@ -235,8 +301,8 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
 
@@ -258,6 +324,35 @@
     };
 
     var clickAddMoveis = function () {
+      // Primeiro, vamos validar os inputs
+      var titleInput = document.getElementById('inputTitle');
+      var descriptionInput = document.getElementById('inputDescription');
+      var priceInput = document.getElementById('inputPrice');
+      var images = document.getElementsByClassName('imageList');
+
+      // Verifica se há pelo menos uma imagem
+      if (images.length === 0) {
+        alert('Você precisa adicionar pelo menos uma imagem.');
+        return;  // Encerra a execução da função aqui
+      }
+
+      // Verifica se o título foi inserido e tem menos de 25 caracteres
+      if (titleInput.value === "" || titleInput.value.length > 25) {
+        alert('O título é obrigatório e não pode ter mais de 25 caracteres.');
+        return;
+      }
+
+      // Verifica se a descrição foi inserida e tem menos de 500 caracteres
+      if (descriptionInput.value === "" || descriptionInput.value.length > 150) {
+        alert('A descrição é obrigatória e não pode ter mais de 150 caracteres.');
+        return;
+      }
+
+      // Verifica se o preço foi inserido
+      if (priceInput.value === "") {
+        alert('Você precisa inserir um preço.');
+        return;
+      }
 
       // Encontra o maior ID existente
       let maxId = Math.max(...listOfProducts.map(p => p.id));
@@ -271,7 +366,7 @@
         if (maxId_image === null || id > maxId_image) {
           maxId_image = id;
         }
-        if(minId === null || id < minId) {
+        if (minId === null || id < minId) {
           minId = id;
         }
       });
@@ -279,12 +374,12 @@
       let imageUrls = []; // Cria um array para armazenar todas as URLs de imagem
 
       for (var i = 0; i <= maxId_image; i++) { // O loop fica ate a ultima imagem inserida
-          let imageUrl = document.getElementById("inputImages-" + i);
-          if (imageUrl && imageUrl.getAttribute("src")) { // Verifica se existe uma imagem, se foi excluida nao entra.
-              imageUrls.push(imageUrl.getAttribute("src")); // Adiciona a URL ao array
-          }
+        let imageUrl = document.getElementById("inputImages-" + i);
+        if (imageUrl && imageUrl.getAttribute("src")) { // Verifica se existe uma imagem, se foi excluida nao entra.
+          imageUrls.push(imageUrl.getAttribute("src")); // Adiciona a URL ao array
+        }
       }
-      
+
 
       var newProduct = {
         id: ++maxId, // Aqui está a geração do novo ID
@@ -296,10 +391,9 @@
         images: imageUrls
       };
 
-
-
       insertProduct(newProduct);
     };
+
 
     var insertProduct = function (product) {
       var xhttp = new XMLHttpRequest();
@@ -335,40 +429,41 @@
       var newRow = '';
       newRow += '<tr>';
 
-      newRow += '<td class="divImg-adm">';
-        // Percorrer todo o array de fotos
-      product.images.forEach(function(image) {
-          newRow += '<img class="img-adm" src="' + image + '">';
+      newRow += '<td data-label="Images" class="divImg-adm">';
+      // Percorrer todo o array de fotos
+      product.images.forEach(function (image) {
+        newRow += '<img class="img-adm" src="' + image + '">';
       });
       newRow += '</td>';
-      
-      newRow += '<td>' + product.title + '</td>';
-      newRow += '<td>' + product.description + '</td>';
-      newRow += '<td>' + product.category + '</td>';
-      newRow += '<td>' + product.price + '</td>';
-      newRow += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">x</button> </td>';
+
+      newRow += '<td data-label="Title">' + product.title + '</td>';
+      newRow += '<td data-label="Description">' + product.description + '</td>';
+      newRow += '<td data-label="Category">' + product.category + '</td>';
+      newRow += '<td data-label="Price">' + product.price + '</td>';
+      newRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">x</button> </td>';
       newRow += '</tr>';
 
-      document.getElementsByTagName("tbody")[0].innerHTML = rows + newRow
+      document.getElementsByTagName("tbody")[0].innerHTML = rows + newRow;
     }
+
 
     var buildRows = function (prods) {
       var rows = '';
       for (let product of prods) {
         rows += '<tr data-p-id="product-id-' + product.id + '" id="product-id-' + product.id + '">';
 
-        rows += '<td class="divImg-adm">';
+        rows += '<td data-label="Images" class="divImg-adm">';
         // Percorrer todo o array de fotos
-        product.images.forEach(function(image) {
+        product.images.forEach(function (image) {
           rows += '<img class="img-adm" src="' + image + '">';
         });
         rows += '</td>';
-       
-        rows += '<td>' + product.title + '</td>';
-        rows += '<td>' + product.description + '</td>';
-        rows += '<td>' + product.category + '</td>';
-        rows += '<td>' + product.price + '</td>';
-        rows += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
+
+        rows += '<td data-label="Title">' + product.title + '</td>';
+        rows += '<td data-label="Description">' + product.description + '</td>';
+        rows += '<td data-label="Category">' + product.category + '</td>';
+        rows += '<td data-label="Price">' + product.price + '</td>';
+        rows += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
         rows += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
         rows += '</tr>';
       }
@@ -381,43 +476,42 @@
 
       let editRow = '';
 
-      editRow += '<td>';
-      for(var i = 0; i < 4; i++) {
-          let imgSrc = product.images[i] || '';
-          editRow += `<div class="edit-preview"><img src="${imgSrc}" class="image-preview" id="image-preview-${i}">`;
-         editRow += `<input type="text" id="edit-images-${i}" value="${imgSrc}" onchange="updateImagePreview(${i})"></div>`;
+      editRow += '<td data-label="Images">';
+      for (var i = 0; i < 4; i++) {
+        let imgSrc = product.images[i] || '';
+        editRow += `<div class="edit-preview"><img src="${imgSrc}" class="image-preview" id="image-preview-${i}">`;
+        editRow += `<input type="text" id="edit-images-${i}" value="${imgSrc}" onchange="updateImagePreview(${i})"></div>`;
       }
       editRow += '</td>';
 
-      editRow += '<td> <input type="text" id="edit-title" value="' + product.title + '"></td>';
-      editRow += '<td> <input type="text" id="edit-description" value="' + product.description + '"></td>';
-      editRow += '<td> <select type="text" id="edit-category">'
-        editRow += ' <option disabled selected style="display:none;">'+ product.category +'</option>'
-        editRow +=  ' <option value="suprimentos_de_escritorio">suprimentos_de_escritorio</option>'
-        editRow +=  ' <option value="moveis">Móveis</option>'
-        editRow +=  ' <option value="eletronicos">Eletrônicos</option>'
-        editRow +=  ' <option value="promocoes">Promoções</option>'
-        editRow +=  '</select>'
-        editRow +=  '</td>';
+      editRow += '<td data-label="Title"> <input type="text" id="edit-title" value="' + product.title + '"></td>';
+      editRow += '<td data-label="Description"> <input type="text" id="edit-description" value="' + product.description + '"></td>';
+      editRow += '<td data-label="Category"> <select type="text" id="edit-category">'
+      editRow += ' <option disabled selected style="display:none;">' + product.category + '</option>'
+      editRow += ' <option value="suprimentos_de_escritorio">suprimentos_de_escritorio</option>'
+      editRow += ' <option value="moveis">Móveis</option>'
+      editRow += ' <option value="eletronicos">Eletrônicos</option>'
+      editRow += ' <option value="promocoes">Promoções</option>'
+      editRow += '</select>'
+      editRow += '</td>';
 
-      editRow += '<td> <input type="text" id="edit-price" value="' + product.price + '"></td>';
-      editRow += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
+      editRow += '<td data-label="Price"> <input type="text" id="edit-price" value="' + product.price + '"></td>';
+      editRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
       editRow += '<button type="button" class="btn btn-success btn-sm" onclick="clickUpdateProduct(' + product.id + ')">Alterar</button> </td>';
-      
-      
-      
+
       document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = editRow;
     };
+
 
     var clickUpdateProduct = function (id) {
 
       let imageUrls = []; // Cria um array para armazenar todas as URLs de imagem
 
       for (var i = 0; i < 4; i++) { // O loop fica ate a ultima imagem inserida
-          let imageUrl = document.getElementById("edit-images-" + i);
-          if (imageUrl.value) { // Verifica se existe uma imagem, se foi excluida nao entra.
-              imageUrls.push(imageUrl.value);  // Adiciona a URL ao array
-          }
+        let imageUrl = document.getElementById("edit-images-" + i);
+        if (imageUrl.value) { // Verifica se existe uma imagem, se foi excluida nao entra.
+          imageUrls.push(imageUrl.value);  // Adiciona a URL ao array
+        }
       }
 
       let product = {
@@ -434,10 +528,10 @@
         if (this.readyState == 4 && this.status == 200) {
           let updatedProduct = JSON.parse(xhttp.responseText);
           var updatedRow = '';
-          
+
           updatedRow += '<td class="divImg-adm">';
-            // Percorrer todo o array de fotos
-          updatedProduct.images.forEach(function(image) {
+          // Percorrer todo o array de fotos
+          updatedProduct.images.forEach(function (image) {
             updatedRow += '<img class="img-adm" src="' + image + '">';
           });
           updatedRow += '</td>';
@@ -461,18 +555,18 @@
       let product = listOfProducts.find(i => i.id === id);
       var row = '';
 
-      row += '<td class="divImg-adm">';
-            // Percorrer todo o array de fotos
-      product.images.forEach(function(image) {
+      row += '<td data-label="Images" class="divImg-adm">';
+      // Percorrer todo o array de fotos
+      product.images.forEach(function (image) {
         row += '<img class="img-adm" src="' + image + '">';
       });
       row += '</td>';
 
-      row += '<td>' + product.title + '</td>';
-      row += '<td>' + product.description + '</td>';
-      row += '<td>' + product.category + '</td>';
-      row += '<td>' + product.price + '</td>';
-      row += '<td> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
+      row += '<td data-label="Title">' + product.title + '</td>';
+      row += '<td data-label="Description">' + product.description + '</td>';
+      row += '<td data-label="Category">' + product.category + '</td>';
+      row += '<td data-label="Price">' + product.price + '</td>';
+      row += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
       row += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
       document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = row;
     };
@@ -494,45 +588,59 @@
       let imageUrl = document.getElementById('edit-images-' + index).value;
       let imgElement = document.getElementById('image-preview-' + index);
       imgElement.src = imageUrl;
-  }
+    }
 
 
-    //// javascript fazer imagens arrumar --->>>>>
+    //// Adicionar imagens, comeco do site --->>>>>
 
     function addImage(event) {
+
       if (event.keyCode === 13) { // verifica se a tecla pressionada é Enter
         event.preventDefault(); // impede o comportamento padrão de inserir uma nova linha
 
-        // Conta as imagens inseridas
-        ++ contador ;
+        var existingImages = document.getElementsByClassName('imageList').length;
+        if (existingImages < 4) {
 
-        var imagesInput = document.getElementById("inputImagens");
-        var imageList = document.getElementById("imageList");
+          // Conta as imagens inseridas
+          ++contador;
 
-        
-        var imageContainer = document.createElement("div");
-        imageContainer.className = "imageItem";
+          var imagesInput = document.getElementById("inputImagens");
+          var imageList = document.getElementById("imageList");
+          //adiciona class a div, colocando altura e etc (css)
+          imageList.className = "col-12 col-md-6 margin-div";
 
-        var image = document.createElement("img");
-        image.className = "imageList inputImages-"+ contador;
-        image.id = "inputImages-"+ contador;
-        image.src = imagesInput.value.trim();
-        imageContainer.appendChild(image);
+          var imageContainer = document.createElement("div");
+          imageContainer.className = "imageItem";
 
-        var deleteButton = document.createElement("button");
-        deleteButton.className = "deleteButton";
-        deleteButton.innerHTML = "X";
-        deleteButton.addEventListener("click", function() {
-        imageContainer.remove();
-        });
-        imageContainer.appendChild(deleteButton);
+          var image = document.createElement("img");
+          image.className = "imageList inputImages-" + contador;
+          image.id = "inputImages-" + contador;
+          image.src = imagesInput.value.trim();
+          imageContainer.appendChild(image);
 
-        imageList.appendChild(imageContainer);
+          var deleteButton = document.createElement("button");
+          deleteButton.className = "deleteButton";
+          deleteButton.innerHTML = "X";
+          deleteButton.addEventListener("click", function () {
+            imageContainer.remove();
 
-        imagesInput.value = ""; // Limpa o campo de entrada
+            // caso nao tenha foto, a div fica sem tamanho
+            var existingImages = document.getElementsByClassName('imageList').length;
+            if (existingImages === 0) {
+              imageList.className = "";
+            }
+          });
+          imageContainer.appendChild(deleteButton);
+
+          imageList.appendChild(imageContainer);
+
+          imagesInput.value = ""; // Limpa o campo de entrada
+        } else {
+          alert('Você só pode adicionar até 4 imagens.'); // mostra um alerta se tentar adicionar mais de 4 imagens
+        }
+
       }
     }
-
 
 
   </script>

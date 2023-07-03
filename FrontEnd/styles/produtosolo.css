@@ -1,0 +1,85 @@
+/* Define a cor de fundo e a fonte usada no body */
+body {
+    background-color: #EAEAEA;
+    font-family: 'Verdana', sans-serif;
+}
+
+/* Aplica uma margem ao container das imagens do produto */
+.product-image--container {
+    margin: 1rem;
+}
+
+/* Estiliza o botão de voltar */
+.botao-voltar {
+    background: transparent;
+    font-size: xx-small; 
+    color: transparent; 
+    margin-left: -11px; 
+    width: 58px; 
+    height: 38px; 
+}
+
+/* Aplica estilos ao botão de voltar quando o mouse está sobre ele */
+.botao-voltar:hover {
+    background: #000000e3; 
+    color: #ffffff;
+}
+
+/* Remove o padding da lista de imagens do produto */
+.product-image--list {
+    padding: 0;
+}
+
+/* Aplica estilos aos itens da lista de imagens do produto */
+.product-image--list li {
+    margin: 0 5px; 
+    border: 2px solid #eaeaea; 
+    border-radius: 5px; 
+    transition: all ease 0.25s; 
+}
+
+/* Aplica estilos aos itens da lista de imagens do produto que estão selecionados */
+.product-image--list li.item-selected {
+    box-shadow: 1px 1px 1px #888888;
+    border: 2px solid #FFC500; 
+}
+
+/* Destaca o preço do produto */
+.emphasize {
+    color: #b32600; 
+    font-size: 1.5em; 
+    letter-spacing: -2px; 
+}
+
+/* Aplica estilos ao botão de adicionar ao carrinho */
+.my-btn {
+    border-radius: 5px; 
+    width: 100%; 
+    height: 50px; 
+    transition: all ease 0.25s; 
+}
+
+/* Aplica estilos ao botão de adicionar ao carrinho quando o mouse está sobre ele */
+.my-btn:hover {
+    box-shadow: 1px 1px 1px #888888; 
+}
+
+/* Cria um container flexível para alinhar itens verticalmente */
+.flex-btn {
+    display: flex;
+    align-items: center;
+}
+
+/* Aplica estilos ao ícone do carrinho */
+.cart-icon {
+    margin: 2px; 
+    width: 30px; 
+    height: 30px; 
+}
+
+/* Aplica estilos ao texto do botão de adicionar ao carrinho */
+.btn-text {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 auto; 
+}
