@@ -12,8 +12,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <!-- (obrigatório para usar Firestore) -->
   <script src="../login/firebase-init.js"></script>
+  <!-- (obrigatório para usar Firestore) -->
   <!--fim links firebase auth-->
 
   <!--direcionamento para o js da pagina index.html do login-->
@@ -44,8 +44,7 @@
       <!-- Itens da barra de navegação -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-
-          <!-- Link para a seção Home -->
+          <!-- Link para a seção Home --> 
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
@@ -215,14 +214,15 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
-                  <h5 class="card-title">${product.title}</h5>
-                  <p class="card-text flex-grow-1">${product.description.slice(0, 100)}</p>
+                  <h5 class="card-title">${product.title.slice(0, 25)}</h5>
+                  <p class="card-text flex-grow-1">${product.description.slice(0, 80)}</p>  
+                  </div>
+                  </div>
 
+                  
                   <div class="botao-div mt-auto">
                     <a href="#" class="btn btn-primary">Comprar</a>
                     <a href="#" class="btn btn-primary produtos-letra" data-section="produto_sozinho" onclick="selectNavItem(event)" data-product-id="${product.id}">Ver+</a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>`;
