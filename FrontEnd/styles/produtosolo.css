@@ -78,7 +78,7 @@ body {
 
 /* Destaca o preço do produto */
 .emphasize {
-    color: #b32600; 
+    color:chartreuse;
     font-size: 1.5em; 
     letter-spacing: -2px; 
 }
