@@ -22,7 +22,7 @@
 /* Esta seção define as cores de fundo e de texto para as classes .produtos, .AdicionarCorFooter e os links dentro de .nav-item2 */
 .produtos, .AdicionarCorFooter, .nav-item2 a{
   background-color: black!important;
-  color: white!important;
+  color: rgba(236, 236, 236, 0.856)!important;
 }
 .produtos-letra:hover{
   color: #1eff00!important;
@@ -99,6 +99,8 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+height: 194px;
+
 }
 
 
@@ -114,9 +116,13 @@ margin-bottom: 5px;
 font-size: 14px;
 color: #666;
 text-align: center;
-margin-bottom: 10px;
+margin-top: 5px;
 }
 
+.preco-text{
+  font-size: 20px;
+  color: black;
+}
 
 
 
@@ -163,25 +169,6 @@ header {
 }
 
 
-.botao-voltar {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  color: #0e8414;
-  font-size: 24px;
-}
-
-.botao-voltar:hover {
-  background-color: transparent;
-  color: #87ab68;
-}
-
-.botao-voltar:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.botao-div {
-  text-align: center;
-  margin-bottom: 15px;
+.preco-produto{
+  margin-top: 10px;
 }

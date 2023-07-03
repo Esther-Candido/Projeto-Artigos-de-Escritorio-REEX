@@ -8,7 +8,7 @@ var cors = require('cors')
 var app = express()
 
 // Importa a função "databaseRepo" do módulo "dbrepo"
-var dbRepo = require('./dbrepo').databaseRepo();
+var dbRepo = require('./db-repo').databaseRepo();
 
 // Importa o módulo "body-parser" que é um middleware para parsear o corpo das requisições HTTP
 const bodyParser = require('body-parser');
@@ -75,7 +75,7 @@ app.get('/products', (req, res) => {
 // Faz a aplicação começar a escutar requisições na porta definida
 app.listen(port, () => {
   // Imprime uma mensagem no console quando a aplicação começa a escutar na porta
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })
 
 

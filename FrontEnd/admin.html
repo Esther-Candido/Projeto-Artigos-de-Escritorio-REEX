@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="r.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <!--link firebase -->
   <!--importar esses links da minha firebase auth-->
@@ -70,7 +70,8 @@
 
         </ul>
       </div>
-      <button type="button" class="clear botao-sair" id="logout-button" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
+      <button type="button" class="clear botao-sair" id="logout-button" onclick="logout()"><i
+          class="fa-solid fa-right-from-bracket"></i></button>
     </nav>
   </header>
 
@@ -110,18 +111,19 @@
 
 
       <style>
-        body{
+        body {
           background-image: none;
-          background-color: rgb(255, 255, 255)!important;
+          background-color: rgb(255, 255, 255) !important;
         }
 
-        .cor-nav{
+        .cor-nav {
           background-color: black;
         }
 
-        .nav-link{
-          color: white!important;
+        .nav-link {
+          color: white !important;
         }
+
         .margin-div {
           margin-top: 20px;
         }
@@ -163,6 +165,11 @@
           background-color: red;
         }
 
+        .botao-todos {
+          width: 58px;
+          margin-top: 10px;
+        }
+
         .divImg-adm {
           object-fit: cover;
           display: flex;
@@ -198,19 +205,29 @@
           flex-direction: row;
         }
 
-        
+
 
         tr {
-            border: 2px solid #ececec;
-            margin-bottom: 10px;
+          border: 2px solid #ececec;
+          margin-bottom: 10px;
+        }
+
+        @media screen and (min-width: 1200px) {
+          .botao-todos {
+            margin-left: 10px;
           }
-        @media screen and (min-width: 1200px){
+
           .img-adm {
-          width: calc(50% - 10px); 
-          height: 70px; 
+            width: calc(50% - 10px);
+            height: 70px;
           }
         }
+
         @media screen and (max-width: 767px) {
+          .botao-todos {
+            margin-left: 10px;
+          }
+
 
           table,
           thead,
@@ -248,7 +265,7 @@
 
           .img-adm {
             width: 48px;
-             height: 50px;
+            height: 50px;
           }
 
           .edit-preview {
@@ -362,7 +379,7 @@
         alert('A descrição é obrigatória e não pode ter mais de 250 caracteres.');
         return;
       }
-     
+
 
       // Verifica se o preço foi inserido
       if (priceInput.value === "") {
@@ -372,6 +389,11 @@
 
       // Encontra o maior ID existente
       let maxId = Math.max(...listOfProducts.map(p => p.id));
+
+      if (maxId === -Infinity) {
+        maxId = 0;
+      }
+
 
       // procurar a imagem com o menor ID e maior ID possivel
       let imageElements = document.querySelectorAll("[id^='inputImages-']");
@@ -396,7 +418,7 @@
         }
       }
 
-      
+
 
 
       var newProduct = {
@@ -428,17 +450,20 @@
     };
 
     var clickDeleteProduct = function (id) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          // Remove a linha do produto da tabela do cliente
-          var rowToRemove = document.getElementById("product-id-" + id);
-          rowToRemove.parentNode.removeChild(rowToRemove);
-        }
-      };
-      xhttp.open("POST", "http://localhost:3000/deleteProduct", true);
-      xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-      xhttp.send(JSON.stringify({ id: id }));
+      var userConfirmation = confirm("Você tem certeza de que deseja deletar este produto?");
+      if (userConfirmation) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            // Remove a linha do produto da tabela do cliente
+            var rowToRemove = document.getElementById("product-id-" + id);
+            rowToRemove.parentNode.removeChild(rowToRemove);
+          }
+        };
+        xhttp.open("POST", "http://localhost:3000/deleteProduct", true);
+        xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+        xhttp.send(JSON.stringify({ id: id }));
+      } 
     };
 
 
@@ -457,8 +482,8 @@
       newRow += '<td data-label="Title">' + product.title + '</td>';
       newRow += '<td data-label="Description">' + product.description + '</td>';
       newRow += '<td data-label="Category">' + product.category + '</td>';
-      newRow += '<td data-label="Price">' + product.price +"€"+'</td>';
-      newRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">x</button> </td>';
+      newRow += '<td data-label="Price">' + product.price + "€" + '</td>';
+      newRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm botao-delete" onclick="clickDeleteProduct(' + product.id + ')">x</button> </td>';
       newRow += '</tr>';
 
       document.getElementsByTagName("tbody")[0].innerHTML = rows + newRow;
@@ -480,9 +505,9 @@
         rows += '<td data-label="Title">' + product.title + '</td>';
         rows += '<td data-label="Description">' + product.description + '</td>';
         rows += '<td data-label="Category">' + product.category + '</td>';
-        rows += '<td data-label="Price">' + product.price +"€"+ '</td>';
-        rows += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
-        rows += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
+        rows += '<td data-label="Price">' + product.price + "€" + '</td>';
+        rows += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm botao-todos" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
+        rows += '<button type="button" class="btn btn-primary btn-sm botao-todos" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
         rows += '</tr>';
       }
 
@@ -503,7 +528,7 @@
       editRow += '</td>';
 
       editRow += '<td data-label="Title"> <input type="text" id="edit-title" maxlength="25" required value="' + product.title + '"></td>';
-      editRow += '<td data-label="Description"> <textarea type="text" id="edit-description" maxlength="250" rows="3" required value="' + product.description + '">'+ product.description + '</textarea></td>';
+      editRow += '<td data-label="Description"> <textarea type="text" id="edit-description" maxlength="250" rows="3" required value="' + product.description + '">' + product.description + '</textarea></td>';
       editRow += '<td data-label="Category"> <select type="text" id="edit-category">'
       editRow += ' <option disabled selected style="display:none;">' + product.category + '</option>'
       editRow += ' <option value="suprimentos_de_escritorio">suprimentos_de_escritorio</option>'
@@ -512,10 +537,10 @@
       editRow += ' <option value="promocoes">Promoções</option>'
       editRow += '</select>'
       editRow += '</td>';
-      
+
       editRow += '<td data-label="Price"> <input type="number" id="edit-price" value="' + product.price + '"></td>';
-      editRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
-      editRow += '<button type="button" class="btn btn-success btn-sm" onclick="clickUpdateProduct(' + product.id + ')">Alterar</button> </td>';
+      editRow += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm botao-todos" onclick="cancelUpdate(' + product.id + ')">Cancelar</button>';
+      editRow += '<button type="button" class="btn btn-success btn-sm botao-todos" onclick="clickUpdateProduct(' + product.id + ')">Alterar</button> </td>';
 
       document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = editRow;
     };
@@ -603,8 +628,8 @@
       row += '<td data-label="Description">' + product.description + '</td>';
       row += '<td data-label="Category">' + product.category + '</td>';
       row += '<td data-label="Price">' + product.price + '</td>';
-      row += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
-      row += '<button type="button" class="btn btn-primary btn-sm" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
+      row += '<td data-label="Actions"> <button type="button" class="btn btn-danger btn-sm botao-todos" onclick="clickDeleteProduct(' + product.id + ')">Excluir</button>';
+      row += '<button type="button" class="btn btn-primary btn-sm botao-todos" onclick="clickEditProduct(' + product.id + ')">Editar</button> </td>';
       document.querySelector('[data-p-id="product-id-' + product.id + '"]').innerHTML = row;
     };
 

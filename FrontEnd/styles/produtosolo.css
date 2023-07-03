@@ -48,12 +48,31 @@ body {
     margin-left: 0px; 
     width: 58px; 
     height: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: #0e8414;
+    font-size: 24px;
 }
+.titulo-margin{
+    margin-top: 165px;
+}
+
+  
+  .botao-voltar:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .botao-div {
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
 /* Aplica estilos ao botão de voltar quando o mouse está sobre ele */
 .botao-voltar:hover {
-    background: #000000e3; 
-    color: #ffffff;
+    background-color: transparent;
+    color: #87ab68;
 }
 
 /* Remove o padding da lista de imagens do produto */
@@ -79,8 +98,8 @@ body {
 /* Destaca o preço do produto */
 .emphasize {
     color:chartreuse;
-    font-size: 1.5em; 
-    letter-spacing: -2px; 
+    font-size: 1.5em;
+    letter-spacing: -2px;
 }
 
 /* Aplica estilos ao botão de adicionar ao carrinho */

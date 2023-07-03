@@ -5,7 +5,7 @@ const fs = require('fs')
 exports.databaseRepo = function () {
 
     // Define o nome do arquivo JSON que será usado como banco de dados
-    var dbNameProducts = 'product_list.json';
+    var dbNameProducts = 'database.json';
 
     // Declara uma função "readDb" que lê o arquivo JSON e retorna o seu conteúdo como um objeto JavaScript
     var readDb = function(dbName){
