@@ -315,8 +315,6 @@
       if (product) {
         // Define a estrutura do layout do produto usando uma template string
         var productDOM = `
-    <div class="container">
-        <div class="row">
             <!-- Início da coluna da imagem do produto -->
             <div class="col-lg-6">
                 <!-- Botão de voltar -->
@@ -339,7 +337,7 @@
             <!-- Início da coluna de detalhes do produto -->
             <div class="col-lg-6">
                 <!-- Título do produto -->
-                <div>
+                <div class="titulo-margin">
                     <h1 class="title">${product.title}</h1>
                 </div>
                 <!-- Preço do produto -->
@@ -362,10 +360,7 @@
                         <span class="btn-text">Add to Cart</span>
                     </button>
                 </div>
-            </div>
-            <!-- Fim da coluna de detalhes do produto -->
-        </div>
-    </div>`;
+            </div>`;
 
         // Insere o layout do produto na div com id 'productRow-produto_sozinho'
         document.getElementById('productRow-produto_sozinho').innerHTML = productDOM;

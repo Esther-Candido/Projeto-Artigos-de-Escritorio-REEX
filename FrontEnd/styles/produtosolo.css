@@ -9,12 +9,44 @@ body {
     margin: 1rem;
 }
 
+/* Ajeita a imagem de maior visibilidade, tamanho padrao para todas */
+.product-image--featured{
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.856);
+    width: 100%;
+    height: 500px;
+    border: 1px rgb(175, 175, 175) solid;
+}
+
+/*imagem menor */
+.product-image--item{
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255);
+    width: 160px;
+    height: 100px;
+    border: 1px rgb(133, 133, 133) solid;
+}
+
+.back-arrow{
+    margin-top: 10px;
+}
+
+.titulo-margin{
+    margin-top: 70px;
+}
+
 /* Estiliza o botão de voltar */
 .botao-voltar {
     background: transparent;
     font-size: xx-small; 
     color: transparent; 
-    margin-left: -11px; 
+    margin-left: 0px; 
     width: 58px; 
     height: 38px; 
 }
@@ -28,6 +60,7 @@ body {
 /* Remove o padding da lista de imagens do produto */
 .product-image--list {
     padding: 0;
+    border: 1px rgb(216, 216, 216) solid;
 }
 
 /* Aplica estilos aos itens da lista de imagens do produto */
