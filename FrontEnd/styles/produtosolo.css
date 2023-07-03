@@ -34,8 +34,8 @@ body {
 
 .back-arrow{
     margin-top: 10px;
+    height: 47px;
 }
-
 .titulo-margin{
     margin-top: 70px;
 }
@@ -47,7 +47,7 @@ body {
     color: transparent; 
     margin-left: 0px; 
     width: 58px; 
-    height: 38px; 
+    height: 100%;
 }
 
 /* Aplica estilos ao botão de voltar quando o mouse está sobre ele */

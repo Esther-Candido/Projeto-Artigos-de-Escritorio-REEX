@@ -36,7 +36,10 @@
     border: none;
     color: black;
 }
-
+.recuperar-senha{
+    color: red;
+    font-size: 13px;
+}
 .solid {
     background-color: #dedbdc;
     border: none;
